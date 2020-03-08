@@ -14,6 +14,7 @@
 		1D3A343924152345000F55B0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1D3A343824152345000F55B0 /* Assets.xcassets */; };
 		1D3A343C24152345000F55B0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D3A343A24152345000F55B0 /* LaunchScreen.storyboard */; };
 		1D3A343F24152345000F55B0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3A343E24152345000F55B0 /* main.m */; };
+		1D3A34472415344B000F55B0 /* SettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3A34462415344B000F55B0 /* SettingsTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,8 @@
 		1D3A343B24152345000F55B0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1D3A343D24152345000F55B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1D3A343E24152345000F55B0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		1D3A34452415344B000F55B0 /* SettingsTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingsTableViewController.h; sourceTree = "<group>"; };
+		1D3A34462415344B000F55B0 /* SettingsTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingsTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +71,8 @@
 				1D3A34322415233D000F55B0 /* ViewController.h */,
 				1D3A34332415233D000F55B0 /* ViewController.m */,
 				1D3A34352415233D000F55B0 /* Main.storyboard */,
+				1D3A34452415344B000F55B0 /* SettingsTableViewController.h */,
+				1D3A34462415344B000F55B0 /* SettingsTableViewController.m */,
 				1D3A343824152345000F55B0 /* Assets.xcassets */,
 				1D3A343A24152345000F55B0 /* LaunchScreen.storyboard */,
 				1D3A343D24152345000F55B0 /* Info.plist */,
@@ -148,6 +153,7 @@
 			files = (
 				1D3A34342415233D000F55B0 /* ViewController.m in Sources */,
 				1D3A342E2415233D000F55B0 /* AppDelegate.m in Sources */,
+				1D3A34472415344B000F55B0 /* SettingsTableViewController.m in Sources */,
 				1D3A343F24152345000F55B0 /* main.m in Sources */,
 				1D3A34312415233D000F55B0 /* SceneDelegate.m in Sources */,
 			);
@@ -292,6 +298,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JDQ47NFW25;
 				INFOPLIST_FILE = EdictusOBJC/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -309,6 +316,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JDQ47NFW25;
 				INFOPLIST_FILE = EdictusOBJC/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

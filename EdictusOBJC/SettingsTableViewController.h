@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  SettingsTableViewController.h
 //  EdictusOBJC
 //
 //  Created by Matteo Zappia on 08/03/2020.
@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController <UINavigationControllerDelegate,UIImagePickerControllerDelegate>
+NS_ASSUME_NONNULL_BEGIN
 
+@interface SettingsTableViewController : UITableViewController
 
 @end
 
+NS_ASSUME_NONNULL_END
