@@ -38,7 +38,6 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(nonnull UIImage *)image editingInfo:(nullable NSDictionary<UIImagePickerControllerInfoKey,id> *)editingInfo
 {
-    //Get Image URL from Library
     if (isDark == false){
     _lightImageView.image = image;
     }else{
