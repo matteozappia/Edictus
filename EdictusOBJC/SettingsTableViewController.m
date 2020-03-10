@@ -18,6 +18,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    UILabel *dateLabel = [[UILabel alloc]initWithFrame:CGRectMake(16, -68, 343, 18)];
+    //[myLabel setBackgroundColor:[UIColor clearColor]];
+    dateLabel.textColor = [UIColor scrollViewTexturedBackgroundColor];
+    [dateLabel setFont:[UIFont boldSystemFontOfSize:12]];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"EEEE d MMMM"];
+    NSLog(@"%@", [dateFormatter stringFromDate:[NSDate date]]);
+    dateLabel.text = [[dateFormatter stringFromDate:[NSDate date]] uppercaseString];
+    [[self view] addSubview:dateLabel];
+    
+    
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -25,6 +36,7 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
+
 
 #pragma mark - Table view data source
 
@@ -37,7 +49,7 @@
 #warning Incomplete implementation, return the number of rows
     switch (section) {
         case 0:
-            return 4;
+            return 3;
         case 1:
             return 2;
         case 2:
@@ -52,6 +64,67 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    
+   if (indexPath.section == 0) {
+        //social
+            switch (indexPath.row) {
+                case 0:
+                    cell.textLabel.text = @"Twitter";
+                    cell.textLabel.textColor = [UIColor systemTealColor];
+                    cell.detailTextLabel.text = @"@aboutzeph";
+                    break;
+                case 1:
+                    cell.textLabel.text = @"GitHub";
+                    cell.textLabel.textColor = [UIColor labelColor];
+                    cell.detailTextLabel.text = @"@matteozappia";
+                    break;
+                case 2:
+                    cell.textLabel.text = @"Reddit";
+                    cell.textLabel.textColor = [UIColor systemOrangeColor];
+                    cell.detailTextLabel.text = @"@zapreme";
+                    break;
+                default:
+                    break;
+            }
+    
+   }else if (indexPath.section == 1) {
+       //feedback
+       switch (indexPath.row) {
+           case 0:
+               cell.textLabel.text = @"Report a Bug";
+               cell.detailTextLabel.text = @"note: add your device information please";
+               break;
+           case 1:
+               cell.textLabel.text = @"Donate Me";
+               cell.detailTextLabel.text = @"if you want to support me click here💘";
+               break;
+               
+           default:
+               break;
+       }
+       
+   }else{
+       //credits
+       
+       switch (indexPath.row) {
+           case 0:
+               cell.textLabel.text = @"Matteo Zappia";
+               cell.detailTextLabel.text = @"@aboutzeph";
+               break;
+           case 1:
+               cell.textLabel.text = @"Soongyu Kwon";
+               cell.detailTextLabel.text = @"@iospeterdev";
+               break;
+           case 2:
+               cell.textLabel.text = @"Stack Overflow";
+               cell.detailTextLabel.text = @"@stackoverflow";
+               break;
+           default:
+               break;
+       }
+   }
+    
+    
 
     return cell;
             
@@ -79,6 +152,56 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if (indexPath.section == 0) {
+         //social
+             switch (indexPath.row) {
+                 case 0:
+                     [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"https://www.twitter.com/aboutzeph"] options:@{} completionHandler:nil];
+                     break;
+                 case 1:
+                     [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"https://www.github.com/matteozappia"] options:@{} completionHandler:nil];
+                     break;
+                 case 2:
+                     [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"https://www.reddit.com/user/zapreme"] options:@{} completionHandler:nil];
+                     break;
+                 default:
+                     break;
+             }
+     
+    }else if (indexPath.section == 1) {
+        //feedback
+        switch (indexPath.row) {
+            case 0:
+                //mailto with device infos here, will do it later
+                break;
+            case 1:
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"https://paypal.me/matteozappia"] options:@{} completionHandler:nil];
+                break;
+                
+            default:
+                break;
+        }
+        
+    }else{
+        //credits
+        
+        switch (indexPath.row) {
+            case 0:
+                //nothing atm
+                break;
+            case 1:
+                //opentwittermaybe?
+                break;
+            case 2:
+                //memetime
+                break;
+                
+            default:
+                break;
+        }
+    }
+    
     
     //just deselect at the moment, no social link or stuff like that
 }
