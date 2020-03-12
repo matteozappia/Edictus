@@ -16,7 +16,6 @@
 		1D3A343F24152345000F55B0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3A343E24152345000F55B0 /* main.m */; };
 		1D3A34472415344B000F55B0 /* SettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3A34462415344B000F55B0 /* SettingsTableViewController.m */; };
 		1D3A34542416DE45000F55B0 /* LiveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3A34532416DE45000F55B0 /* LiveViewController.m */; };
-		508445C32419DC21009874A0 /* Wallpaper.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1D3A34502415CE1C000F55B0 /* Wallpaper.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,7 +33,6 @@
 		1D3A343E24152345000F55B0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		1D3A34452415344B000F55B0 /* SettingsTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingsTableViewController.h; sourceTree = "<group>"; };
 		1D3A34462415344B000F55B0 /* SettingsTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingsTableViewController.m; sourceTree = "<group>"; };
-		1D3A34502415CE1C000F55B0 /* Wallpaper.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Wallpaper.plist; path = ../../../../Desktop/Wallpaper.plist; sourceTree = "<group>"; };
 		1D3A34522416DE45000F55B0 /* LiveViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LiveViewController.h; sourceTree = "<group>"; };
 		1D3A34532416DE45000F55B0 /* LiveViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LiveViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -82,7 +80,6 @@
 				1D3A34462415344B000F55B0 /* SettingsTableViewController.m */,
 				1D3A343824152345000F55B0 /* Assets.xcassets */,
 				1D3A343A24152345000F55B0 /* LaunchScreen.storyboard */,
-				1D3A34502415CE1C000F55B0 /* Wallpaper.plist */,
 				1D3A343D24152345000F55B0 /* Info.plist */,
 				1D3A343E24152345000F55B0 /* main.m */,
 			);
@@ -146,7 +143,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				508445C32419DC21009874A0 /* Wallpaper.plist in Resources */,
 				1D3A343C24152345000F55B0 /* LaunchScreen.storyboard in Resources */,
 				1D3A343924152345000F55B0 /* Assets.xcassets in Resources */,
 				1D3A34372415233D000F55B0 /* Main.storyboard in Resources */,
