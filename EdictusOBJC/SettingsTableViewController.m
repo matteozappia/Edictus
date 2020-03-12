@@ -21,7 +21,7 @@
     UILabel *dateLabel = [[UILabel alloc]initWithFrame:CGRectMake(16, -68, 343, 18)];
     //[myLabel setBackgroundColor:[UIColor clearColor]];
     dateLabel.textColor = [UIColor scrollViewTexturedBackgroundColor];
-    [dateLabel setFont:[UIFont boldSystemFontOfSize:12]];
+    [dateLabel setFont:[UIFont systemFontOfSize:12 weight:UIFontWeightBold]];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"EEEE d MMMM"];
     NSLog(@"%@", [dateFormatter stringFromDate:[NSDate date]]);

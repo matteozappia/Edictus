@@ -80,8 +80,12 @@
     UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
     if (isDark){
         _darkImageView.image = image;
+        NSData *imageData = [NSData dataWithData:UIImagePNGRepresentation(image)];
+        [imageData writeToFile:[@"/var/mobile/Media/Edictus/" stringByAppendingPathComponent:@"Dark.png"] atomically:YES];
     } else {
         _lightImageView.image = image;
+        NSData *imageData = [NSData dataWithData:UIImagePNGRepresentation(image)];
+        [imageData writeToFile:[@"/var/mobile/Media/Edictus/" stringByAppendingPathComponent:@"Light.png"] atomically:YES];
     }
     
     [self dismissViewControllerAnimated:YES completion:nil];
