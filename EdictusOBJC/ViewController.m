@@ -32,40 +32,38 @@
     picker.delegate = self;
     picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     
-    
-    
-    
 }
 
 
--(void) createWallpaperplist{
-    NSFileManager *fileManager;
-    fileManager = [NSFileManager defaultManager];
+-(void)createWallpaperplist{
+    NSFileManager *fileManager = [NSFileManager defaultManager];
     
     //creating Edictus Folder in Media
-    if ([fileManager fileExistsAtPath:@"/var/mobile/Media/Edictus"]){
-        //nothing
-        NSLog(@"Edictus folder already exists in Media");
-   }else{
-       NSLog(@"Creating Edictus folder in Media");
-       NSURL *newDir = [NSURL fileURLWithPath:@"/var/mobile/Media/Edictus"];
-       [fileManager createDirectoryAtURL: newDir withIntermediateDirectories:YES attributes: nil error:nil];
+    if (![fileManager fileExistsAtPath:@"/var/mobile/Media/Edictus"]){
+        NSLog(@"Creating Edictus folder in Media");
+        NSURL *newDir = [NSURL fileURLWithPath:@"/var/mobile/Media/Edictus"];
+        [fileManager createDirectoryAtURL:newDir withIntermediateDirectories:YES attributes: nil error:nil];
     }
-    
-    // get file URL from bundle
-    NSURL *fileFromBundle = [[NSBundle mainBundle]URLForResource:@"Wallpaper" withExtension:@"plist"];
-        
-    // destination URL
-    NSURL *destinationURL = [NSURL fileURLWithPath:@"/var/mobile/Media/Edictus"];
-        
-    // copy it over
 
-    if ([fileManager fileExistsAtPath: destinationURL.absoluteString]){
-        //nothing.
-        NSLog(@"file already exists");
-    }else{
-        [[NSFileManager defaultManager]copyItemAtURL:fileFromBundle toURL:destinationURL error:nil];
-       NSLog(@"Wallpaper.plist is now in /var/mobile/Media/Edictus/");
+    if (![fileManager fileExistsAtPath: [NSURL fileURLWithPath:@"/var/mobile/Media/Edictus"].absoluteString]){
+        NSString *wallpaperPlist = [NSString stringWithFormat:@"<?xml version=""1.0"" encoding=""UTF-8""?>\n"
+                                                        "<!DOCTYPE plist PUBLIC ""-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"">\n"
+                                                        "<plist version=""1.0"">\n"
+                                                        "<dict>\n"
+                                                        "<key>appearanceAware</key>\n"
+                                                        "<true/>\n"
+                                                        "<key>darkImage</key>\n"
+                                                        "<string>Dark.png</string>\n"
+                                                        "<key>defaultImage</key>\n"
+                                                        "<string>Light.png</string>\n"
+                                                        "<key>thumbnailImage</key>\n"
+                                                        "<string>Thumbnail.jpg</string>\n"
+                                                        "<key>wallpaperType</key>\n"
+                                                        "<integer>0</integer>\n"
+                                                        "</dict>\n"
+                                                        "</plist>\n"];
+        
+        [[NSFileManager defaultManager] createFileAtPath:@"/var/mobile/Media/Edictus/Wallpaper.plist" contents:[wallpaperPlist dataUsingEncoding:NSUTF8StringEncoding] attributes:nil];
     }
     
 }
@@ -73,14 +71,12 @@
 
 // function to copy the completed bundle folder from media to wallpaperloader
 - (void)copyChangeToMedia {
-    NSURL *oldURL = [NSURL fileURLWithPath:@"/var/mobile/Media/Edictus/"];
-    NSURL *newURL = [NSURL fileURLWithPath:@"/Library/WallpaperLoader"];
-    [[NSFileManager defaultManager] copyItemAtPath:oldURL toPath:newURL error:nil];
+    [[NSFileManager defaultManager] copyItemAtPath:@"/var/mobile/Media/Edictus/" toPath:@"/Library/WallpaperLoader" error:nil];
     printf("Successfully moved a folder\n");
 }
 
 
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(nonnull UIImage *)image editingInfo:(nullable NSDictionary<UIImagePickerControllerInfoKey,id> *)editingInfo {
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(nonnull UIImage *)image editingInfo:(nullable NSDictionary<UIImagePickerControllerInfoKey,id> *)editingInfo {
     if (isDark){
         _darkImageView.image = image;
     } else {
