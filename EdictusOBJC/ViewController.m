@@ -82,7 +82,7 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(nonnull UIImage *)image editingInfo:(nullable NSDictionary<UIImagePickerControllerInfoKey,id> *)editingInfo
 {
-    if (isDark == false){
+    if (!isDark){
     _lightImageView.image = image;
     }else{
         _darkImageView.image = image;
