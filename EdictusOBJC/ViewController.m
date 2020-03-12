@@ -17,7 +17,7 @@
 
 @implementation ViewController {
     UIImagePickerController *picker;
-    BOOL *isDark;
+    BOOL isDark;
 }
 
 - (void)viewDidLoad {
@@ -80,12 +80,11 @@
 }
 
 
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(nonnull UIImage *)image editingInfo:(nullable NSDictionary<UIImagePickerControllerInfoKey,id> *)editingInfo
-{
-    if (!isDark){
-    _lightImageView.image = image;
-    }else{
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(nonnull UIImage *)image editingInfo:(nullable NSDictionary<UIImagePickerControllerInfoKey,id> *)editingInfo {
+    if (isDark){
         _darkImageView.image = image;
+    } else {
+        _lightImageView.image = image;
     }
     
     [self dismissModalViewControllerAnimated:YES];
@@ -94,13 +93,13 @@
 
 
 - (IBAction)lightButtonPressed:(id)sender {
+    isDark = NO;
     [self presentModalViewController:picker animated:YES];
-    isDark = false;
 }
 
 - (IBAction)darkButtonPressed:(id)sender {
+    isDark = YES;
      [self presentModalViewController:picker animated:YES];
-    isDark = true;
 }
 
 - (IBAction)createButtonPressed:(id)sender {
