@@ -76,51 +76,56 @@
 }
 
 
--(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(nonnull UIImage *)image editingInfo:(nullable NSDictionary<UIImagePickerControllerInfoKey,id> *)editingInfo {
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
     if (isDark){
         _darkImageView.image = image;
     } else {
         _lightImageView.image = image;
     }
     
-    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
     
 }
 
+-(void)presentImagePickerView {
+    //noob
+}
 
 - (IBAction)lightButtonPressed:(id)sender {
     isDark = NO;
-    [self presentModalViewController:picker animated:YES];
+    [self presentViewController:picker animated:YES completion:nil];
 }
 
 - (IBAction)darkButtonPressed:(id)sender {
     isDark = YES;
-     [self presentModalViewController:picker animated:YES];
+    [self presentViewController:picker animated:YES completion:nil];
 }
 
 - (IBAction)createButtonPressed:(id)sender {
     
     // create alert, textField.text will be the bundle name
-    UIAlertController *alertVC= [UIAlertController alertControllerWithTitle:@"Wallpaper Title" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"Wallpaper Title" message:nil preferredStyle:UIAlertControllerStyleAlert];
     [alertVC addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
       {
-        textField.placeholder=@"Choose your wallpaper's name";
-        textField.clearButtonMode=UITextFieldViewModeWhileEditing;
+        textField.placeholder = @"Choose your wallpaper's name";
+        textField.clearButtonMode = UITextFieldViewModeWhileEditing;
       }
     }];
-    UIAlertAction *action=[UIAlertAction actionWithTitle:@"Save" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    
+    UIAlertAction *action = [UIAlertAction actionWithTitle:@"Save" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
       NSLog(@"Save Tapped");
-      NSString *wallpaperName=alertVC.textFields[0].text;
-      NSLog(@"%@",wallpaperName);
+      NSString *wallpaperName = alertVC.textFields[0].text;
+      NSLog(@"%@", wallpaperName);
     }];
-    UIAlertAction *cancel=[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+    
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         [self dismissViewControllerAnimated:YES completion:nil];
-}];
+    }];
+    
     [alertVC addAction:action];
     [alertVC addAction:cancel];
     [self presentViewController:alertVC animated:true completion:nil];
-    
-    //
     
 }
 
