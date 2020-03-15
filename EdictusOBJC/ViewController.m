@@ -121,7 +121,32 @@
       NSLog(@"Save Tapped");
       NSString *wallpaperName = alertVC.textFields[0].text;
       NSLog(@"%@", wallpaperName);
+      
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+           
+        NSString *mediaEdictus = @"/var/mobile/Media/Edictus/";
+        NSString *wallpaperNameInMedia = [NSString stringWithFormat: @"%@%@", mediaEdictus, wallpaperName];
+        NSLog(@"%@", wallpaperNameInMedia);
+           //creating Edictus Folder in Media
+           if (![fileManager fileExistsAtPath:wallpaperNameInMedia]){
+               NSLog(@"Moving Files to wallpapername folder");
+               NSURL *newDir = [NSURL fileURLWithPath:wallpaperNameInMedia];
+               [fileManager createDirectoryAtURL:newDir withIntermediateDirectories:YES attributes: nil error:nil];
+
+
+               // Get all files at /var/mobile/Media/Edictus/
+               NSArray *files = [fileManager contentsOfDirectoryAtPath:mediaEdictus error:nil];
+               
+               // Move all files to bundle created
+               for (NSString *file in files) {
+                   [fileManager moveItemAtPath:[mediaEdictus stringByAppendingPathComponent:file]
+                               toPath:[wallpaperNameInMedia stringByAppendingPathComponent:file]
+                                error:nil];
+               }
+        
+    }
     }];
+    
     
     UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         [self dismissViewControllerAnimated:YES completion:nil];
