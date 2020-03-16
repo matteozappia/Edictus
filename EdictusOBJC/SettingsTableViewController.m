@@ -11,14 +11,13 @@
 @interface SettingsTableViewController ()
 @property (strong, nonatomic) IBOutlet UILabel *socialLabel;
 @property (strong, nonatomic) IBOutlet UILabel *usernameLabel;
-
+@property (strong, nonatomic) UILabel *datelabel;
 @end
 
 @implementation SettingsTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     UILabel *dateLabel = [[UILabel alloc]initWithFrame:CGRectMake(16, -68, 343, 18)];
     //[myLabel setBackgroundColor:[UIColor clearColor]];
     dateLabel.textColor = [UIColor scrollViewTexturedBackgroundColor];
@@ -28,6 +27,12 @@
     NSLog(@"%@", [dateFormatter stringFromDate:[NSDate date]]);
     dateLabel.text = [[dateFormatter stringFromDate:[NSDate date]] uppercaseString];
     [[self view] addSubview:dateLabel];
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"Date"] == YES){
+        [dateLabel setHidden: NO];
+    }else{
+        [dateLabel setHidden: YES];
+        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
+    }
     
     
     
@@ -40,6 +45,24 @@
 
 
 
+- (void)switchChanged:(id)sender {
+    UISwitch *switchControl = sender;
+    NSLog( @"The switch is %@", switchControl.on ? @"ON" : @"OFF" );
+    if (switchControl.on){
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"Date"];
+       [self performSegueWithIdentifier: @"Initial" sender: self];
+
+       // [_datelabel setHidden:NO];
+      //  [self presentViewController:self animated:true completion:nil];
+    }else{
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"Date"];
+        [self performSegueWithIdentifier: @"Initial" sender: self];
+
+    //    [_datelabel setHidden:YES];
+    //    [self presentViewController:self animated:true completion:nil];
+    }
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -51,7 +74,7 @@
 #warning Incomplete implementation, return the number of rows
     switch (section) {
         case 0:
-            return 1;
+            return 2;
         case 1:
             return 2;
         case 2:
@@ -88,7 +111,7 @@
    if (indexPath.section == 0) {
         //general
                switch (indexPath.row) {
-                    case 0:
+                   case 0:{
                         cell.imageView.image = [UIImage systemImageNamed: @"trash"];
                         cell.imageView.tintColor = [UIColor systemYellowColor];
                         cell.textLabel.text = @"Delete Wallpapers";
@@ -96,6 +119,20 @@
                         cell.detailTextLabel.text = @"Easily delete wallpapers you created";
                        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                         break;
+                   }
+                   case 1:{
+                       [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+                       cell.imageView.image = [UIImage systemImageNamed: @"calendar"];
+                       cell.textLabel.text = @"Enable Date in NavBar";
+                       [cell.textLabel setFont:[UIFont systemFontOfSize:15 weight:UIFontWeightMedium]];
+                       cell.detailTextLabel.text = @"" ;
+                     UISwitch *onoffSwitch = [[UISwitch alloc] initWithFrame: CGRectZero];
+                       [onoffSwitch setOn: [[NSUserDefaults standardUserDefaults] boolForKey:@"Date"]];
+                       [onoffSwitch addTarget:self action:@selector(switchChanged:) forControlEvents:UIControlEventValueChanged];
+                       onoffSwitch.onTintColor = [UIColor systemYellowColor];
+                       cell.accessoryView = onoffSwitch;
+                       break;
+               }
                     default:
                         break;
                 }
@@ -106,7 +143,7 @@
        case 0:
                cell.textLabel.text = @"Report a Bug";
                [cell.textLabel setFont:[UIFont systemFontOfSize:15 weight:UIFontWeightMedium]];
-               cell.detailTextLabel.text = @"NOTE: device specs will be included";
+               cell.detailTextLabel.text = @"NOTE: Device specs will be included";
                cell.imageView.image = [UIImage systemImageNamed:@"ant"];
            break;
        case 1:
@@ -216,7 +253,11 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     if (indexPath.section == 0){
-        [self performSegueWithIdentifier: @"DeletedWallpapersSegue" sender: self];
+        if (indexPath.row == 0) {
+                [self performSegueWithIdentifier: @"DeletedWallpapersSegue" sender: self];
+        }else{
+               //none
+        }
     }
      
     if (indexPath.section == 1) {

@@ -11,6 +11,7 @@
 
 @interface ViewController : UIViewController <UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 
+@property (strong, nonatomic) IBOutlet UILabel *currentDateLabel;
 
 @end
 

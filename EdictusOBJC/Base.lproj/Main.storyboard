@@ -48,6 +48,7 @@
                     <navigationItem key="navigationItem" title="Settings" id="Xqo-07-rS9"/>
                     <connections>
                         <segue destination="5tZ-P7-5DF" kind="show" identifier="DeletedWallpapersSegue" id="H23-8M-tpC"/>
+                        <segue destination="PKe-gA-eGo" kind="presentation" identifier="Initial" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="5lJ-Nz-yif"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KOB-WX-oA6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -196,6 +197,7 @@
         <scene sceneID="WWZ-NS-gr3">
             <objects>
                 <tabBarController id="PKe-gA-eGo" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="lnG-kl-Ajr"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="1Ej-91-oVY">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -246,6 +248,7 @@
             <objects>
                 <navigationController id="VsD-E1-x7r" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Dynamic" image="circle.bottomthird.split" catalog="system" id="zEp-k3-ej1"/>
+                    <navigationItem key="navigationItem" id="9ZO-9x-AND"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="GdB-K1-2Qj">
                         <rect key="frame" x="0.0" y="44" width="375" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -261,7 +264,7 @@
         <!--Edictus-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -399,7 +402,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Edictus" id="Cnw-2p-wFQ"/>
                     <connections>
-                        <outlet property="currentDateLabel" destination="Plq-uK-nia" id="a8R-qv-Uq4"/>
+                        <outlet property="currentDateLabel" destination="Plq-uK-nia" id="MVZ-WI-UhS"/>
                         <outlet property="darkImageView" destination="kSc-t2-sPD" id="5v2-TS-nf2"/>
                         <outlet property="lightImageView" destination="tCP-0h-hcO" id="DZj-WH-PpF"/>
                     </connections>

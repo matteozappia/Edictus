@@ -28,7 +28,6 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 #warning Incomplete implementation, return the number of sections
-    
     NSInteger numOfSections = 0;
     
        if (numOfSections > 0)
@@ -38,7 +37,7 @@
        }
        else
        {
-           UILabel *noDataLabel         = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, noDataLabel.bounds.size.width, tableView.bounds.size.height)];
+           UILabel *noDataLabel         = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, tableView.bounds.size.height)];
            noDataLabel.text             = @"No Wallpapers Available";
            noDataLabel.textColor        = [UIColor scrollViewTexturedBackgroundColor];
            noDataLabel.textAlignment    = NSTextAlignmentCenter;

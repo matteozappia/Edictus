@@ -9,7 +9,6 @@
 #import "ViewController.h"
 
 @interface ViewController ()
-@property (strong, nonatomic) IBOutlet UILabel *currentDateLabel;
 @property (strong, nonatomic) IBOutlet UIImageView *lightImageView;
 @property (strong, nonatomic) IBOutlet UIImageView *darkImageView;
 
@@ -27,6 +26,11 @@
     [dateFormatter setDateFormat:@"EEEE d MMMM"];
     NSLog(@"%@", [dateFormatter stringFromDate:[NSDate date]]);
     self.currentDateLabel.text = [[dateFormatter stringFromDate:[NSDate date]] uppercaseString];
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"Date"] == YES){
+    [_currentDateLabel setHidden: NO];
+    }else{
+    [_currentDateLabel setHidden: YES];
+    }
     picker = [[UIImagePickerController alloc] init];
     picker.delegate = self;
     picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
