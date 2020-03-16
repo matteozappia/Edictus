@@ -264,14 +264,13 @@
         <!--Edictus-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="ViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="CURRENT DATE LABEL" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Plq-uK-nia">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CURRENT DATE LABEL" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Plq-uK-nia">
                                 <rect key="frame" x="16" y="72" width="343" height="18"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                 <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                 <nil key="highlightedColor"/>
@@ -385,12 +384,16 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Ea8-Hh-hFG" secondAttribute="trailing" constant="22" id="DJH-iS-37V"/>
                             <constraint firstItem="Ea8-Hh-hFG" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="24" id="IoJ-wD-Jvj"/>
                             <constraint firstItem="kSc-t2-sPD" firstAttribute="centerY" secondItem="rzb-lF-mvX" secondAttribute="centerY" id="L8e-qx-0Ua"/>
+                            <constraint firstItem="oDr-PU-DiE" firstAttribute="top" secondItem="Plq-uK-nia" secondAttribute="bottom" constant="53" id="SPD-YZ-QRc"/>
                             <constraint firstItem="oDr-PU-DiE" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="3" id="XDt-Rj-WsX"/>
                             <constraint firstItem="bQd-He-pxR" firstAttribute="centerX" secondItem="rzb-lF-mvX" secondAttribute="centerX" id="ZCW-lx-vpu"/>
+                            <constraint firstItem="Plq-uK-nia" firstAttribute="leading" secondItem="oDr-PU-DiE" secondAttribute="leading" id="aLA-RO-9b8"/>
                             <constraint firstItem="tCP-0h-hcO" firstAttribute="top" secondItem="oDr-PU-DiE" secondAttribute="bottom" constant="14" id="aMw-nk-z0S"/>
                             <constraint firstItem="mY6-eP-5Um" firstAttribute="top" secondItem="tCP-0h-hcO" secondAttribute="bottom" constant="9" id="c5h-fL-aa0"/>
                             <constraint firstItem="kSc-t2-sPD" firstAttribute="top" secondItem="oDr-PU-DiE" secondAttribute="bottom" constant="14" id="cA2-cb-Dma"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="oDr-PU-DiE" secondAttribute="trailing" constant="16" id="hjO-Nv-wen"/>
+                            <constraint firstItem="Plq-uK-nia" firstAttribute="trailing" secondItem="oDr-PU-DiE" secondAttribute="trailing" id="kAa-H0-WB9"/>
+                            <constraint firstItem="Plq-uK-nia" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" constant="-68" id="kMk-F9-jEJ"/>
                             <constraint firstItem="tCP-0h-hcO" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="24" id="oUF-t2-IGr"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="bQd-He-pxR" secondAttribute="trailing" constant="22" id="rcO-PP-gg4"/>
                             <constraint firstItem="kSc-t2-sPD" firstAttribute="leading" secondItem="tCP-0h-hcO" secondAttribute="trailing" constant="19" id="suZ-hc-2FM"/>
@@ -402,7 +405,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Edictus" id="Cnw-2p-wFQ"/>
                     <connections>
-                        <outlet property="currentDateLabel" destination="Plq-uK-nia" id="MVZ-WI-UhS"/>
+                        <outlet property="currentDateLabel" destination="Plq-uK-nia" id="DRz-2r-Op3"/>
                         <outlet property="darkImageView" destination="kSc-t2-sPD" id="5v2-TS-nf2"/>
                         <outlet property="lightImageView" destination="tCP-0h-hcO" id="DZj-WH-PpF"/>
                     </connections>
