@@ -18,6 +18,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     UILabel *dateLabel = [[UILabel alloc]initWithFrame:CGRectMake(16, -68, 343, 18)];
     //[myLabel setBackgroundColor:[UIColor clearColor]];
     dateLabel.textColor = [UIColor scrollViewTexturedBackgroundColor];
@@ -38,18 +39,19 @@
 }
 
 
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 #warning Incomplete implementation, return the number of sections
-    return 3;
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 #warning Incomplete implementation, return the number of rows
     switch (section) {
         case 0:
-            return 3;
+            return 1;
         case 1:
             return 2;
         case 2:
@@ -61,69 +63,121 @@
     return 0;
 }
 
+- (void)tableView:(UITableView *)tableView willDisplayFooterView:(UIView *)view forSection:(NSInteger)section
+{
+    UITableViewHeaderFooterView *footer = (UITableViewHeaderFooterView *)view;
+    footer.textLabel.textAlignment = NSTextAlignmentCenter;
+    [footer.textLabel setFont:[UIFont systemFontOfSize:12 weight:UIFontWeightMedium]];
+}
+
+-(NSString*)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section   {
+    NSString *message = @"";
+
+       if (section == 2) {
+           message = @"\n\nmade with 💛 in Italy";
+       }
+
+       return message;
+    }
+
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     
    if (indexPath.section == 0) {
-        //social
-            switch (indexPath.row) {
-                case 0:
-                    cell.textLabel.text = @"Twitter";
-                    cell.textLabel.textColor = [UIColor systemTealColor];
-                    cell.detailTextLabel.text = @"@aboutzeph";
-                    break;
-                case 1:
-                    cell.textLabel.text = @"GitHub";
-                    cell.textLabel.textColor = [UIColor labelColor];
-                    cell.detailTextLabel.text = @"@matteozappia";
-                    break;
-                case 2:
-                    cell.textLabel.text = @"Reddit";
-                    cell.textLabel.textColor = [UIColor systemOrangeColor];
-                    cell.detailTextLabel.text = @"@zapreme";
-                    break;
-                default:
-                    break;
-            }
-    
-   }else if (indexPath.section == 1) {
+        //general
+               switch (indexPath.row) {
+                    case 0:
+                        cell.imageView.image = [UIImage systemImageNamed: @"trash"];
+                        cell.imageView.tintColor = [UIColor systemYellowColor];
+                        cell.textLabel.text = @"Delete Wallpapers";
+                        cell.detailTextLabel.text = @"Easily delete wallpapers you created";
+                       cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                        break;
+                    default:
+                        break;
+                }
+       
+   }else if (indexPath.section == 1){
        //feedback
        switch (indexPath.row) {
-           case 0:
-               cell.textLabel.text = @"Report a Bug";
-               cell.detailTextLabel.text = @"note: add your device information please";
-               break;
-           case 1:
-               cell.textLabel.text = @"Donate Me";
-               cell.detailTextLabel.text = @"if you want to support me click here💘";
-               break;
-               
-           default:
-               break;
+       case 0:
+           cell.textLabel.text = @"Report a Bug";
+           cell.detailTextLabel.text = @"note: add your device information please";
+           break;
+       case 1:
+           cell.textLabel.text = @"Donate Me";
+           cell.detailTextLabel.text = @"if you want to support me click here💘";
+           break;
+           
+       default:
+           break;
        }
        
    }else{
        //credits
+       NSData * aboutzephPic = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: @"https://avatars.io/twitter/aboutzeph"]];
+       NSData * iospeterdevPic = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: @"https://avatars.io/twitter/iospeterdev"]];
+       NSData * stackoverflowPic = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: @"https://avatars.io/twitter/stackoverflow"]];
+
        
        switch (indexPath.row) {
-           case 0:
+           case 0:{
                cell.textLabel.text = @"Matteo Zappia";
                cell.detailTextLabel.text = @"@aboutzeph";
+               cell.imageView.image = [UIImage imageWithData: aboutzephPic];
+               CGSize destinationSize = CGSizeMake(35, 35);
+                                   UIGraphicsBeginImageContextWithOptions(destinationSize, NO, 0.0f)
+
+;
+                                   [cell.imageView.image drawInRect:CGRectMake(0,0,destinationSize.width,destinationSize.height)];
+                                   UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+                                   UIGraphicsEndImageContext();
+               cell.imageView.image = newImage;
+               [cell layoutIfNeeded];
+               cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
+               cell.imageView.layer.cornerRadius =  cell.imageView.frame.size.width / 2;
+               cell.imageView.clipsToBounds = YES;
                break;
-           case 1:
+           }
+           case 1:{
                cell.textLabel.text = @"Soongyu Kwon";
                cell.detailTextLabel.text = @"@iospeterdev";
+               cell.imageView.image = [UIImage imageWithData: iospeterdevPic];
+               CGSize destinationSize = CGSizeMake(35, 35);
+                                                 UIGraphicsBeginImageContextWithOptions(destinationSize, NO, 0.0f);
+                                                 [cell.imageView.image drawInRect:CGRectMake(0,0,destinationSize.width,destinationSize.height)];
+                                                 UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+                                                 UIGraphicsEndImageContext();
+                             cell.imageView.image = newImage;
+               [cell layoutIfNeeded];
+               cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
+               cell.imageView.layer.cornerRadius =  cell.imageView.frame.size.width / 2;
+               cell.imageView.clipsToBounds = YES;
                break;
-           case 2:
+           }
+           case 2:{
                cell.textLabel.text = @"Stack Overflow";
                cell.detailTextLabel.text = @"@stackoverflow";
+               cell.imageView.image = [UIImage imageWithData: stackoverflowPic];
+               CGSize destinationSize = CGSizeMake(35, 35);
+                                                 UIGraphicsBeginImageContextWithOptions(destinationSize, NO, 0.0f);
+                                                 [cell.imageView.image drawInRect:CGRectMake(0,0,destinationSize.width,destinationSize.height)];
+                                                 UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+                                                 UIGraphicsEndImageContext();
+                             cell.imageView.image = newImage;
+               [cell layoutIfNeeded];
+               cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
+               cell.imageView.layer.cornerRadius =  cell.imageView.frame.size.width / 2;
+               cell.imageView.clipsToBounds = YES;
                break;
-           default:
+           }
+           default:{
                break;
+           }
        }
    }
-    
     
 
     return cell;
@@ -131,16 +185,16 @@
     
 }
 
+
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     
     switch (section) {
         case 0:
-            return @"Social";
+            return @"General";
         case 1:
             return @"Feedback";
         case 2:
             return @"Credits";
-            
         default:
             break;
     }
@@ -153,23 +207,11 @@
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if (indexPath.section == 0) {
-         //social
-             switch (indexPath.row) {
-                 case 0:
-                     [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"https://www.twitter.com/aboutzeph"] options:@{} completionHandler:nil];
-                     break;
-                 case 1:
-                     [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"https://www.github.com/matteozappia"] options:@{} completionHandler:nil];
-                     break;
-                 case 2:
-                     [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"https://www.reddit.com/user/zapreme"] options:@{} completionHandler:nil];
-                     break;
-                 default:
-                     break;
-             }
+    if (indexPath.section == 0){
+        [self performSegueWithIdentifier: @"DeletedWallpapersSegue" sender: self];
+    }
      
-    }else if (indexPath.section == 1) {
+    if (indexPath.section == 1) {
         //feedback
         switch (indexPath.row) {
             case 0:
@@ -183,18 +225,23 @@
                 break;
         }
         
-    }else{
+    }
+    
+    if (indexPath.section == 2) {
         //credits
         
         switch (indexPath.row) {
             case 0:
                 //nothing atm
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"https://www.twitter.com/aboutzeph"] options:@{} completionHandler:nil];
                 break;
             case 1:
                 //opentwittermaybe?
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"https://www.twitter.com/iospeterdev"] options:@{} completionHandler:nil];
                 break;
             case 2:
                 //memetime
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"https://www.youtube.com/watch?v=dQw4w9WgXcQ"] options:@{} completionHandler:nil];
                 break;
                 
             default:

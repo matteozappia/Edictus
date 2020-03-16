@@ -46,6 +46,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Settings" id="Xqo-07-rS9"/>
+                    <connections>
+                        <segue destination="5tZ-P7-5DF" kind="show" identifier="DeletedWallpapersSegue" id="H23-8M-tpC"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KOB-WX-oA6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -169,6 +172,13 @@
                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="29"/>
                                 </state>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="WE WILL WORK ON IT LATER!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TsC-U8-gnj">
+                                <rect key="frame" x="16" y="552" width="343" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" weight="black" pointSize="23"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="TB4-Vh-rgo"/>
@@ -195,7 +205,6 @@
                     </tabBar>
                     <connections>
                         <segue destination="VsD-E1-x7r" kind="relationship" relationship="viewControllers" id="Qa3-Dq-QZW"/>
-                        <segue destination="g96-1O-GhW" kind="relationship" relationship="viewControllers" id="flw-RI-k50"/>
                         <segue destination="l3a-mB-ogH" kind="relationship" relationship="viewControllers" id="hrQ-S1-rCn"/>
                     </connections>
                 </tabBarController>
@@ -203,20 +212,20 @@
             </objects>
             <point key="canvasLocation" x="-2549" y="-12"/>
         </scene>
-        <!--Root View Controller-->
+        <!--Wallpapers-->
         <scene sceneID="Qf4-5f-Lme">
             <objects>
-                <tableViewController id="5tZ-P7-5DF" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="rgl-1r-JnA">
+                <tableViewController id="5tZ-P7-5DF" customClass="WallpapersTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="rgl-1r-JnA">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="7Gg-RC-4jZ">
-                                <rect key="frame" x="0.0" y="28" width="375" height="43.666667938232422"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="WallpaperCell" id="7Gg-RC-4jZ">
+                                <rect key="frame" x="16" y="55.333332061767578" width="343" height="43.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7Gg-RC-4jZ" id="zWc-YJ-XsO">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.666667938232422"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="343" height="43.666667938232422"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -226,11 +235,11 @@
                             <outlet property="delegate" destination="5tZ-P7-5DF" id="BKd-dc-gxD"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="9dS-Xd-i2e"/>
+                    <navigationItem key="navigationItem" title="Wallpapers" id="9dS-Xd-i2e"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VFI-uG-dxQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="199" y="-651"/>
+            <point key="canvasLocation" x="857" y="759"/>
         </scene>
         <!--Dynamic-->
         <scene sceneID="QgG-2i-0S7">
@@ -335,7 +344,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LMK-md-f5U">
-                                <rect key="frame" x="82" y="301" width="38" height="36"/>
+                                <rect key="frame" x="82.666666666666671" y="301" width="38" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="tintColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                 <state key="normal" image="sun.max.fill" catalog="system">
@@ -346,7 +355,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rzb-lF-mvX">
-                                <rect key="frame" x="259" y="303" width="32" height="32"/>
+                                <rect key="frame" x="259.66666666666669" y="303" width="32" height="32"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="tintColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                 <state key="normal" image="moon.fill" catalog="system">
@@ -409,4 +418,5 @@
         <image name="sun.max.fill" catalog="system" width="64" height="62"/>
         <image name="video.fill" catalog="system" width="64" height="40"/>
     </resources>
+    <color key="tintColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>
