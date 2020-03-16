@@ -22,7 +22,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self createWallpaperplist];
     // Do any additional setup after loading the view.
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"EEEE d MMMM"];
@@ -87,7 +86,7 @@
         NSData *imageData = [NSData dataWithData:UIImagePNGRepresentation(image)];
         [imageData writeToFile:[@"/var/mobile/Media/Edictus/" stringByAppendingPathComponent:@"Light.png"] atomically:YES];
     }
-    
+    [self createWallpaperplist];
     [self dismissViewControllerAnimated:YES completion:nil];
     
 }

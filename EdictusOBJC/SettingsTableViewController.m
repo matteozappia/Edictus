@@ -44,7 +44,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 #warning Incomplete implementation, return the number of sections
-    return 4;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -92,6 +92,7 @@
                         cell.imageView.image = [UIImage systemImageNamed: @"trash"];
                         cell.imageView.tintColor = [UIColor systemYellowColor];
                         cell.textLabel.text = @"Delete Wallpapers";
+                       [cell.textLabel setFont:[UIFont systemFontOfSize:15 weight:UIFontWeightMedium]];
                         cell.detailTextLabel.text = @"Easily delete wallpapers you created";
                        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                         break;
@@ -103,12 +104,16 @@
        //feedback
        switch (indexPath.row) {
        case 0:
-           cell.textLabel.text = @"Report a Bug";
-           cell.detailTextLabel.text = @"note: add your device information please";
+               cell.textLabel.text = @"Report a Bug";
+               [cell.textLabel setFont:[UIFont systemFontOfSize:15 weight:UIFontWeightMedium]];
+               cell.detailTextLabel.text = @"NOTE: device specs will be included";
+               cell.imageView.image = [UIImage systemImageNamed:@"ant"];
            break;
        case 1:
-           cell.textLabel.text = @"Donate Me";
-           cell.detailTextLabel.text = @"if you want to support me click here💘";
+               cell.textLabel.text = @"Donate Me";
+               [cell.textLabel setFont:[UIFont systemFontOfSize:15 weight:UIFontWeightMedium]];
+               cell.detailTextLabel.text = @"If you want to support me click here 💘";
+               cell.imageView.image = [UIImage systemImageNamed:@"dollarsign.circle"];
            break;
            
        default:
@@ -126,6 +131,7 @@
            case 0:{
                cell.textLabel.text = @"Matteo Zappia";
                cell.detailTextLabel.text = @"@aboutzeph";
+               [cell.textLabel setFont:[UIFont systemFontOfSize:17 weight:UIFontWeightSemibold]];
                cell.imageView.image = [UIImage imageWithData: aboutzephPic];
                CGSize destinationSize = CGSizeMake(35, 35);
                                    UIGraphicsBeginImageContextWithOptions(destinationSize, NO, 0.0f)
@@ -144,6 +150,7 @@
            case 1:{
                cell.textLabel.text = @"Soongyu Kwon";
                cell.detailTextLabel.text = @"@iospeterdev";
+               [cell.textLabel setFont:[UIFont systemFontOfSize:17 weight:UIFontWeightSemibold]];
                cell.imageView.image = [UIImage imageWithData: iospeterdevPic];
                CGSize destinationSize = CGSizeMake(35, 35);
                                                  UIGraphicsBeginImageContextWithOptions(destinationSize, NO, 0.0f);
@@ -160,6 +167,7 @@
            case 2:{
                cell.textLabel.text = @"Stack Overflow";
                cell.detailTextLabel.text = @"@stackoverflow";
+               [cell.textLabel setFont:[UIFont systemFontOfSize:17 weight:UIFontWeightSemibold]];
                cell.imageView.image = [UIImage imageWithData: stackoverflowPic];
                CGSize destinationSize = CGSizeMake(35, 35);
                                                  UIGraphicsBeginImageContextWithOptions(destinationSize, NO, 0.0f);
