@@ -97,7 +97,7 @@
     NSString *message = @"";
 
        if (section == 2) {
-           message = @"\n\nmade with 💛 in Italy";
+           message = @"\nmade with 💛 in Italy";
        }
 
        return message;
@@ -264,7 +264,7 @@
         //feedback
         switch (indexPath.row) {
             case 0:
-                //mailto with device infos here, will do it later
+               [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"https://github.com/matteozappia/EdictusBugTracker/issues/new?assignees=&labels=bug&template=bug-report.md&title=%5BBUG%5D"] options:@{} completionHandler:nil];
                 break;
             case 1:
                 [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"https://paypal.me/matteozappia"] options:@{} completionHandler:nil];

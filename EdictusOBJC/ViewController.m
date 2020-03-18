@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface ViewController ()
 @property (strong, nonatomic) IBOutlet UIImageView *lightImageView;
@@ -34,6 +35,8 @@
     picker = [[UIImagePickerController alloc] init];
     picker.delegate = self;
     picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    
+    
     
 }
 
@@ -83,10 +86,12 @@
     UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
     if (isDark){
         _darkImageView.image = image;
+        _darkThumbnail.image = image;
         NSData *imageData = [NSData dataWithData:UIImagePNGRepresentation(image)];
         [imageData writeToFile:[@"/var/mobile/Media/Edictus/" stringByAppendingPathComponent:@"Dark.png"] atomically:YES];
     } else {
         _lightImageView.image = image;
+        _lightThumbnail.image = image;
         NSData *imageData = [NSData dataWithData:UIImagePNGRepresentation(image)];
         [imageData writeToFile:[@"/var/mobile/Media/Edictus/" stringByAppendingPathComponent:@"Light.png"] atomically:YES];
     }
@@ -107,6 +112,15 @@
 - (IBAction)darkButtonPressed:(id)sender {
     isDark = YES;
     [self presentViewController:picker animated:YES completion:nil];
+}
+
+- (UIImage *) imageWithView:(UIView *)view
+{
+    UIGraphicsBeginImageContextWithOptions(view.bounds.size, view.opaque, 0.0f);
+    [view drawViewHierarchyInRect:view.bounds afterScreenUpdates:NO];
+    UIImage * snapshotImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return snapshotImage;
 }
 
 - (IBAction)createButtonPressed:(id)sender {
@@ -135,6 +149,17 @@
                NSLog(@"Moving Files to wallpapername folder");
                NSURL *newDir = [NSURL fileURLWithPath:wallpaperNameInMedia];
                [fileManager createDirectoryAtURL:newDir withIntermediateDirectories:YES attributes: nil error:nil];
+               
+               // CREATE THUMBNAIL
+               
+               UIImage *thumbnailImage = [self imageWithView:[self thumbnailView]];
+               NSData *imageData = [NSData dataWithData:UIImageJPEGRepresentation(thumbnailImage, 1.0)];
+                   [imageData writeToFile:[@"/var/mobile/Media/Edictus/" stringByAppendingPathComponent:@"Thumbnail.jpg"] atomically:YES];
+               
+               
+               
+               
+               
 
 
                // Get all files at /var/mobile/Media/Edictus/

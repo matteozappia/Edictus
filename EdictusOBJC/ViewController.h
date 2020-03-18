@@ -12,6 +12,9 @@
 @interface ViewController : UIViewController <UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UILabel *currentDateLabel;
+@property (strong, nonatomic) IBOutlet UIImageView *lightThumbnail;
+@property (strong, nonatomic) IBOutlet UIImageView *darkThumbnail;
+@property (strong, nonatomic) IBOutlet UIView *thumbnailView;
 
 @end
 
