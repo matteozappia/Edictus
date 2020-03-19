@@ -96,12 +96,8 @@
         [imageData writeToFile:[@"/var/mobile/Media/Edictus/" stringByAppendingPathComponent:@"Light.png"] atomically:YES];
     }
     [self createWallpaperplist];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [picker dismissViewControllerAnimated:YES completion:nil];
     
-}
-
--(void)presentImagePickerView {
-    //noob
 }
 
 - (IBAction)lightButtonPressed:(id)sender {
@@ -114,8 +110,7 @@
     [self presentViewController:picker animated:YES completion:nil];
 }
 
-- (UIImage *) imageWithView:(UIView *)view
-{
+- (UIImage *) imageWithView:(UIView *)view {
     UIGraphicsBeginImageContextWithOptions(view.bounds.size, view.opaque, 0.0f);
     [view drawViewHierarchyInRect:view.bounds afterScreenUpdates:NO];
     UIImage * snapshotImage = UIGraphicsGetImageFromCurrentImageContext();
