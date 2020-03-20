@@ -78,6 +78,11 @@
 // function to copy the completed bundle folder from media to wallpaperloader
 - (void)copyChangeToMedia {
     NSFileManager *fileManager = [NSFileManager defaultManager];
+    //creating Edictus Folder in Media
+    if (![fileManager fileExistsAtPath:@"/Library/WallpaperLoader"]){
+        NSURL *newDir = [NSURL fileURLWithPath:@"/Library/WallpaperLoader"];
+        [fileManager createDirectoryAtURL:newDir withIntermediateDirectories:YES attributes: nil error:nil];
+    }
     NSArray *files = [fileManager contentsOfDirectoryAtPath:@"/var/mobile/Media/Edictus/" error:nil];
     for (NSString *file in files) {
         [fileManager moveItemAtPath:[@"/var/mobile/Media/Edictus/" stringByAppendingPathComponent:file]
@@ -184,8 +189,8 @@
                    
                 // [self copyChangeToMedia];
                }
-        
-    }
+               [self copyChangeToMedia];
+           }
     }];
     
     
