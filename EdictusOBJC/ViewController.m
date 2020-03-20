@@ -77,7 +77,13 @@
 
 // function to copy the completed bundle folder from media to wallpaperloader
 - (void)copyChangeToMedia {
-    [[NSFileManager defaultManager] copyItemAtPath:@"/var/mobile/Media/Edictus/" toPath:@"/Library/WallpaperLoader" error:nil];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSArray *files = [fileManager contentsOfDirectoryAtPath:@"/var/mobile/Media/Edictus/" error:nil];
+    for (NSString *file in files) {
+        [fileManager moveItemAtPath:[@"/var/mobile/Media/Edictus/" stringByAppendingPathComponent:file]
+                    toPath:[@"/Library/WallpaperLoader/" stringByAppendingPathComponent:file]
+                     error:nil];
+    }
     printf("Successfully moved a folder\n");
 }
 
@@ -96,12 +102,8 @@
         [imageData writeToFile:[@"/var/mobile/Media/Edictus/" stringByAppendingPathComponent:@"Light.png"] atomically:YES];
     }
     [self createWallpaperplist];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [picker dismissViewControllerAnimated:YES completion:nil];
     
-}
-
--(void)presentImagePickerView {
-    //noob
 }
 
 - (IBAction)lightButtonPressed:(id)sender {
@@ -114,8 +116,7 @@
     [self presentViewController:picker animated:YES completion:nil];
 }
 
-- (UIImage *) imageWithView:(UIView *)view
-{
+- (UIImage *) imageWithView:(UIView *)view {
     UIGraphicsBeginImageContextWithOptions(view.bounds.size, view.opaque, 0.0f);
     [view drawViewHierarchyInRect:view.bounds afterScreenUpdates:NO];
     UIImage * snapshotImage = UIGraphicsGetImageFromCurrentImageContext();
@@ -154,22 +155,34 @@
                
                UIImage *thumbnailImage = [self imageWithView:[self thumbnailView]];
                NSData *imageData = [NSData dataWithData:UIImageJPEGRepresentation(thumbnailImage, 1.0)];
-                   [imageData writeToFile:[@"/var/mobile/Media/Edictus/" stringByAppendingPathComponent:@"Thumbnail.jpg"] atomically:YES];
+               [imageData writeToFile:[@"/var/mobile/Media/Edictus/" stringByAppendingPathComponent:@"Thumbnail.jpg"] atomically:YES];
                
-               
-               
-               
-               
-
-
                // Get all files at /var/mobile/Media/Edictus/
                NSArray *files = [fileManager contentsOfDirectoryAtPath:mediaEdictus error:nil];
-               
+               NSArray *jpgThumb = [files filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"self ENDSWITH '.jpg'"]];
+               NSArray *pngFiles = [files filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"self ENDSWITH '.png'"]];
+               NSArray *plistFiles = [files filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"self ENDSWITH '.plist'"]];
                // Move all files to bundle created
-               for (NSString *file in files) {
+               for (NSString *file in jpgThumb) {
                    [fileManager moveItemAtPath:[mediaEdictus stringByAppendingPathComponent:file]
                                toPath:[wallpaperNameInMedia stringByAppendingPathComponent:file]
                                 error:nil];
+                   
+                // [self copyChangeToMedia];
+               }
+               for (NSString *file in pngFiles) {
+                   [fileManager moveItemAtPath:[mediaEdictus stringByAppendingPathComponent:file]
+                               toPath:[wallpaperNameInMedia stringByAppendingPathComponent:file]
+                                error:nil];
+                   
+                // [self copyChangeToMedia];
+               }
+               for (NSString *file in plistFiles) {
+                   [fileManager moveItemAtPath:[mediaEdictus stringByAppendingPathComponent:file]
+                               toPath:[wallpaperNameInMedia stringByAppendingPathComponent:file]
+                                error:nil];
+                   
+                // [self copyChangeToMedia];
                }
         
     }

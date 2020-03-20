@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface WallpapersTableViewController : UITableViewController
-
+@property (nonatomic, copy, readwrite) NSArray* dirs;
 @end
 
 NS_ASSUME_NONNULL_END

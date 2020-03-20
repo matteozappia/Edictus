@@ -14,8 +14,22 @@
 
 @implementation WallpapersTableViewController
 
+//NSString *LibraryPath = @"/var/mobile/Media/Edictus";
+NSString *LibraryPath = @"/Library/WallpaperLoader";
+NSArray *dirs ;
+NSMutableArray *mutableDirs ;
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self addThemesFromDirectory];
+    UIRefreshControl *refreshController = [[UIRefreshControl alloc] init];
+    [refreshController addTarget:self action:@selector(handleRefresh:) forControlEvents:UIControlEventValueChanged];
+    [self.tableView addSubview:refreshController];
+    [self.tableView setEditing: YES];
+    NSArray* dirs = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:LibraryPath error:NULL];
+    mutableDirs = [dirs mutableCopy];
+
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -24,16 +38,71 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
+-(void)handleRefresh:(id)sender
+{
+   NSLog (@"Refreshing...");
+   // [self.tableView reloadData];
+    [UIView transitionWithView: self.tableView
+                     duration: 0.10f
+                      options: UIViewAnimationOptionTransitionCrossDissolve
+                   animations: ^(void)
+    {
+         [self.tableView reloadData];
+    }
+                   completion: nil];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+       [sender endRefreshing];
+    });
+    
+}
+
+- (void)addThemesFromDirectory {
+  //  NSLog(@"%@", dirs);
+    };
+    
+    
+    //[[[NSFileManager defaultManager] displayNameAtPath:@"/var/mobile/Media/Edictus"] stringByDeletingPathExtension];
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 #warning Incomplete implementation, return the number of sections
+    
     NSInteger numOfSections = 0;
+    numOfSections = mutableDirs.count;
     
        if (numOfSections > 0)
        {
            tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
            tableView.backgroundView = nil;
+           return 1;
        }
        else
        {
@@ -50,7 +119,9 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 #warning Incomplete implementation, return the number of rows
-    return 0;
+    
+    
+    return mutableDirs.count;
 }
 
 
@@ -59,31 +130,42 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WallpaperCell" forIndexPath:indexPath];
     
-    // Configure the cell...
     
+    // Configure the cell...
+    //NSString * stringToDisplay = [dirs componentsJoinedByString:@"\n"];
+    int i;
+    for (i=0;i<=((sizeof(mutableDirs)/sizeof(int)));i++){
+        cell.textLabel.text = [[mutableDirs objectAtIndex:indexPath.row] capitalizedString];
+    }
     return cell;
+    
+    
 }
 
 
-/*
+
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     // Return NO if you do not want the specified item to be editable.
     return YES;
 }
-*/
 
-/*
+
+
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
+        NSString *cellN = [mutableDirs objectAtIndex: indexPath.row];
+        NSString *path = [@"/var/mobile/Media/Edictus/" stringByAppendingString:cellN];
+        [[NSFileManager defaultManager] removeItemAtPath:path error:nil];
+        [mutableDirs removeObjectAtIndex:indexPath.row];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+        
+    }
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
 }
-*/
+
 
 /*
 // Override to support rearranging the table view.
