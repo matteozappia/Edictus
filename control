@@ -1,0 +1,9 @@
+Package: com.matteozappia.edictusobjc
+Name: Edictus
+Version: 1.0.0
+Architecture: iphoneos-arm
+Depends: uikittools
+Description: Description
+Maintainer: Test
+Author: Test
+Section: Applications
