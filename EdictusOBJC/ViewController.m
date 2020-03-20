@@ -149,14 +149,8 @@
                
                UIImage *thumbnailImage = [self imageWithView:[self thumbnailView]];
                NSData *imageData = [NSData dataWithData:UIImageJPEGRepresentation(thumbnailImage, 1.0)];
-                   [imageData writeToFile:[@"/var/mobile/Media/Edictus/" stringByAppendingPathComponent:@"Thumbnail.jpg"] atomically:YES];
+               [imageData writeToFile:[@"/var/mobile/Media/Edictus/" stringByAppendingPathComponent:@"Thumbnail.jpg"] atomically:YES];
                
-               
-               
-               
-               
-
-
                // Get all files at /var/mobile/Media/Edictus/
                NSArray *files = [fileManager contentsOfDirectoryAtPath:mediaEdictus error:nil];
                
