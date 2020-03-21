@@ -7,8 +7,11 @@ all::
 after-stage::
 	mv EdictusOBJC.xcarchive/Products/Applications $(THEOS_STAGING_DIR)/Applications
 	rm -rf EdictusOBJC.xcarchive
+	$(MAKE) -C edictusroot LEAN_AND_MEAN=1
+	mkdir -p $(THEOS_STAGING_DIR)/usr/bin
+	mv $(THEOS_OBJ_DIR)/edictusroot $(THEOS_STAGING_DIR)/usr/bin
 	ldid -S $(THEOS_STAGING_DIR)/Applications/EdictusOBJC.app/EdictusOBJC
-	ldid -Sentitlements.xml $(THEOS_STAGING_DIR)/Applications/EdictusOBJC.app/EdictusOBJC
+	ldid -SEdictusOBJC.entitlements $(THEOS_STAGING_DIR)/Applications/EdictusOBJC.app/EdictusOBJC
 
 after-install::
 	install.exec "killall \"EdictusOBJC\" || true"

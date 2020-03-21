@@ -1,1 +1,4 @@
 chown -R mobile:mobile /Applications/EdictusOBJC.app
+chown 0:0 /usr/bin/edictusroot
+chmod 6755 /usr/bin/edictusroot
+echo "[edictusroot / Edictus] Permissions fixed!"

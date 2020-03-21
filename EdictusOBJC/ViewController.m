@@ -35,9 +35,6 @@
     picker = [[UIImagePickerController alloc] init];
     picker.delegate = self;
     picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    
-    
-    
 }
 
 
@@ -76,22 +73,26 @@
 
 
 // function to copy the completed bundle folder from media to wallpaperloader
-- (void)copyChangeToMedia {
+- (void)copyChangeToMediaWithThisWallpaperPath:(NSString *)wallpaperName {
     NSFileManager *fileManager = [NSFileManager defaultManager];
     //creating Edictus Folder in Media
     if (![fileManager fileExistsAtPath:@"/Library/WallpaperLoader"]){
-        NSURL *newDir = [NSURL fileURLWithPath:@"/Library/WallpaperLoader"];
-        [fileManager createDirectoryAtURL:newDir withIntermediateDirectories:YES attributes: nil error:nil];
+        pid_t pid;
+        const char* args[] = {"edictusroot", "mkdir", "/Library/WallpaperLoader", NULL};
+        posix_spawn(&pid, "/usr/bin/edictusroot", NULL, NULL, (char* const*)args, NULL);
     }
-    NSArray *files = [fileManager contentsOfDirectoryAtPath:@"/var/mobile/Media/Edictus/" error:nil];
-    for (NSString *file in files) {
-        [fileManager moveItemAtPath:[@"/var/mobile/Media/Edictus/" stringByAppendingPathComponent:file]
-                    toPath:[@"/Library/WallpaperLoader/" stringByAppendingPathComponent:file]
-                     error:nil];
-    }
+    pid_t pid;
+    const char* args[] = {"edictusroot", "mv", [wallpaperName cStringUsingEncoding:NSUTF8StringEncoding], "/Library/WallpaperLoader/", NULL};
+    posix_spawn(&pid, "/usr/bin/edictusroot", NULL, NULL, (char* const*)args, NULL);
+    [self fuckOffPreferences];
     printf("Successfully moved a folder\n");
 }
 
+-(void)fuckOffPreferences {
+    pid_t pid;
+    const char* args[] = {"killall", "Preferences", NULL};
+    posix_spawn(&pid, "/usr/bin/killall", NULL, NULL, (char* const*)args, NULL);
+}
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
@@ -189,7 +190,7 @@
                    
                 // [self copyChangeToMedia];
                }
-               [self copyChangeToMedia];
+               [self copyChangeToMediaWithThisWallpaperPath:wallpaperNameInMedia];
            }
     }];
     

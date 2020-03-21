@@ -157,8 +157,13 @@ NSMutableArray *mutableDirs ;
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
         NSString *cellN = [mutableDirs objectAtIndex: indexPath.row];
-        NSString *path = [@"/var/mobile/Media/Edictus/" stringByAppendingString:cellN];
-        [[NSFileManager defaultManager] removeItemAtPath:path error:nil];
+        NSString *path = [@"/Library/WallpaperLoader/" stringByAppendingString:cellN];
+        
+        pid_t pid;
+        const char* args[] = {"edictusroot", "rm", "-rf", [path cStringUsingEncoding:NSUTF8StringEncoding], NULL};
+        posix_spawn(&pid, "/usr/bin/edictusroot", NULL, NULL, (char* const*)args, NULL);
+        [self fuckOffPreferences];
+        
         [mutableDirs removeObjectAtIndex:indexPath.row];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
         
@@ -166,6 +171,11 @@ NSMutableArray *mutableDirs ;
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
 }
 
+-(void)fuckOffPreferences {
+    pid_t pid;
+    const char* args[] = {"killall", "Preferences", NULL};
+    posix_spawn(&pid, "/usr/bin/killall", NULL, NULL, (char* const*)args, NULL);
+}
 
 /*
 // Override to support rearranging the table view.
