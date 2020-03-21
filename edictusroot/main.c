@@ -51,15 +51,15 @@ void patch_libjailbreak() {
 int main(int argc, char *argv[], char *envp[]) {
   // Check parent process, courtesy of
   // https://github.com/wstyres/Zebra/blob/master/Supersling/main.c
-  /*pid_t pid = getppid();
+  pid_t pid = getppid();
 
   char buffer[4 * PATH_MAX];
   int ret = proc_pidpath(pid, buffer, sizeof(buffer));
-  if (ret < 1 || strcmp(buffer, "/Applications/Packager.app/Packager") != 0) {
+  if (ret < 1 || strcmp(buffer, "/Applications/Edictus.app/Edictus") != 0) {
     fflush(stdout);
     printf("[edictusroot] you are not edictus...\n");
     return 1;
-  }*/
+  }
 
   if (argc == 1) {
     printhelp();

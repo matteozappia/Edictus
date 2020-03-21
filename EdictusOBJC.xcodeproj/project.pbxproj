@@ -20,7 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1D3A34292415233D000F55B0 /* EdictusOBJC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EdictusOBJC.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D3A34292415233D000F55B0 /* Edictus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Edictus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D3A342C2415233D000F55B0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		1D3A342D2415233D000F55B0 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		1D3A342F2415233D000F55B0 /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
@@ -62,7 +62,7 @@
 		1D3A342A2415233D000F55B0 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1D3A34292415233D000F55B0 /* EdictusOBJC.app */,
+				1D3A34292415233D000F55B0 /* Edictus.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -108,7 +108,7 @@
 			);
 			name = EdictusOBJC;
 			productName = EdictusOBJC;
-			productReference = 1D3A34292415233D000F55B0 /* EdictusOBJC.app */;
+			productReference = 1D3A34292415233D000F55B0 /* Edictus.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -317,7 +317,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.matteozappia.EdictusOBJC;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Edictus;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -336,7 +336,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.matteozappia.EdictusOBJC;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Edictus;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
