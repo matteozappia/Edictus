@@ -1,9 +1,9 @@
-Package: com.matteozappia.edictusobjc
+Package: com.matteozappia.edictus
 Name: Edictus
-Version: 1.0.0
+Version: 1.0
 Architecture: iphoneos-arm
 Depends: uikittools
-Description: Description
-Maintainer: Test
-Author: Test
-Section: Applications
+Description: Create custom dynamic wallpapers!
+Maintainer: aboutzeph <aboutzeph@gmail.com>
+Author: aboutzeph <aboutzeph@gmail.com>
+Section: Utilities

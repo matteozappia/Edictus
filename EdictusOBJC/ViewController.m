@@ -12,6 +12,8 @@
 @interface ViewController ()
 @property (strong, nonatomic) IBOutlet UIImageView *lightImageView;
 @property (strong, nonatomic) IBOutlet UIImageView *darkImageView;
+@property (strong, nonatomic) IBOutlet UIButton *createButton;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *deleteButton;
 
 @end
 
@@ -35,6 +37,34 @@
     picker = [[UIImagePickerController alloc] init];
     picker.delegate = self;
     picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    // IMPORTANT : Create Edictus Folder in Media for the first time.
+    [self createFirstTimeMedia];
+}
+    
+    -(void)createFirstTimeMedia{
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        if (![fileManager fileExistsAtPath:@"/var/mobile/Media/Edictus"]){
+            NSLog(@"Creating Edictus folder in Media");
+            NSURL *newDir = [NSURL fileURLWithPath:@"/var/mobile/Media/Edictus"];
+            [fileManager createDirectoryAtURL:newDir withIntermediateDirectories:YES attributes: nil error:nil];
+        }
+    }
+
+-(void)deleteStuff{
+    _lightImageView.image = nil;
+    _darkImageView.image = nil;
+    [[self createButton] setUserInteractionEnabled:NO];
+    [[self createButton] setAlpha:0.5];
+    // just to clean up
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSError *error;
+    [fileManager removeItemAtPath:@"/var/mobile/Media/Edictus/Light.png" error:&error];
+    [fileManager removeItemAtPath:@"/var/mobile/Media/Edictus/Dark.png" error:&error];
+    [fileManager removeItemAtPath:@"/var/mobile/Media/Edictus/Wallpaper.plist" error:&error];
+}
+
+- (IBAction)deleteAction:(id)sender {
+    [self deleteStuff];
 }
 
 
@@ -110,6 +140,10 @@
     [self createWallpaperplist];
     [picker dismissViewControllerAnimated:YES completion:nil];
     
+    if (_lightImageView.image != nil && _darkImageView.image != nil){
+        [[self createButton] setUserInteractionEnabled:YES];
+        [[self createButton] setAlpha:1.0];
+    }
 }
 
 - (IBAction)lightButtonPressed:(id)sender {
@@ -191,6 +225,37 @@
                 // [self copyChangeToMedia];
                }
                [self copyChangeToMediaWithThisWallpaperPath:wallpaperNameInMedia];
+               
+               UIAlertController * alert = [UIAlertController
+                                            alertControllerWithTitle:@"Wallpaper Created"
+                                            message:nil
+                                            preferredStyle:UIAlertControllerStyleAlert];
+
+               //Add Buttons
+
+               UIAlertAction* openSettings = [UIAlertAction
+                                           actionWithTitle:@"Open Settings"
+                                           style:UIAlertActionStyleDefault
+                                           handler:^(UIAlertAction * action) {
+                                              // Open Wallpaper Settings
+                                               [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"App-Prefs:Wallpaper"] options:@{} completionHandler:nil];
+                   [self deleteStuff];
+                                           }];
+
+               UIAlertAction* cancel = [UIAlertAction
+                                          actionWithTitle:@"Cancel"
+                                          style:UIAlertActionStyleCancel
+                                          handler:^(UIAlertAction * action) {
+                                              //Handle no, thanks button
+                   [self deleteStuff];
+                                          }];
+
+               //Add your buttons to alert controller
+
+               [alert addAction:openSettings];
+               [alert addAction:cancel];
+
+               [self presentViewController:alert animated:YES completion:nil];
            }
     }];
     

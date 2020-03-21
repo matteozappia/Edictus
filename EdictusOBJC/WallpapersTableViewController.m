@@ -29,7 +29,6 @@ NSMutableArray *mutableDirs ;
     [self.tableView setEditing: YES];
     NSArray* dirs = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:LibraryPath error:NULL];
     mutableDirs = [dirs mutableCopy];
-
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -98,28 +97,28 @@ NSMutableArray *mutableDirs ;
     NSInteger numOfSections = 0;
     numOfSections = mutableDirs.count;
     
-       if (numOfSections > 0)
+       if (numOfSections >= 0)
        {
            tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
            tableView.backgroundView = nil;
            return 1;
        }
-       else
-       {
-           UILabel *noDataLabel         = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, tableView.bounds.size.height)];
-           noDataLabel.text             = @"No Wallpapers Available";
-           noDataLabel.textColor        = [UIColor scrollViewTexturedBackgroundColor];
-           noDataLabel.textAlignment    = NSTextAlignmentCenter;
-           tableView.backgroundView = noDataLabel;
-           tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-       }
-
+      
        return numOfSections;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 #warning Incomplete implementation, return the number of rows
     
+    if (mutableDirs.count == 0){
+        
+        UILabel *noDataLabel         = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, tableView.bounds.size.height)];
+                  noDataLabel.text             = @"No Wallpapers Available";
+                  noDataLabel.textColor        = [UIColor scrollViewTexturedBackgroundColor];
+                  noDataLabel.textAlignment    = NSTextAlignmentCenter;
+                  tableView.backgroundView = noDataLabel;
+                  tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    }
     
     return mutableDirs.count;
 }
@@ -131,6 +130,7 @@ NSMutableArray *mutableDirs ;
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WallpaperCell" forIndexPath:indexPath];
     
     
+    
     // Configure the cell...
     //NSString * stringToDisplay = [dirs componentsJoinedByString:@"\n"];
     int i;
@@ -140,6 +140,21 @@ NSMutableArray *mutableDirs ;
     return cell;
     
     
+    
+}
+
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    
+    if (section == 0){
+    if (mutableDirs.count == 0){
+        return @"";
+    }else{
+        return @"Delete Wallpapers";
+    }
+    }
+ 
+    return @"";
 }
 
 
@@ -154,6 +169,7 @@ NSMutableArray *mutableDirs ;
 
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView reloadData];
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
         NSString *cellN = [mutableDirs objectAtIndex: indexPath.row];
@@ -163,9 +179,12 @@ NSMutableArray *mutableDirs ;
         const char* args[] = {"edictusroot", "rm", "-rf", [path cStringUsingEncoding:NSUTF8StringEncoding], NULL};
         posix_spawn(&pid, "/usr/bin/edictusroot", NULL, NULL, (char* const*)args, NULL);
         [self fuckOffPreferences];
-        
         [mutableDirs removeObjectAtIndex:indexPath.row];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        [tableView reloadData];
+        
+        
+        
         
     }
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view

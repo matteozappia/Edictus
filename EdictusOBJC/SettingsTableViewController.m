@@ -31,7 +31,6 @@
         [dateLabel setHidden: NO];
     }else{
         [dateLabel setHidden: YES];
-        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
     }
     
     

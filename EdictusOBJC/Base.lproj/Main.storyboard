@@ -221,7 +221,6 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="rgl-1r-JnA">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="WallpaperCell" id="7Gg-RC-4jZ">
                                 <rect key="frame" x="16" y="55.333332061767578" width="343" height="43.666667938232422"/>
@@ -264,7 +263,7 @@
         <!--Edictus-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -352,7 +351,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ea8-Hh-hFG">
+                            <button opaque="NO" userInteractionEnabled="NO" alpha="0.45000000000000001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ea8-Hh-hFG">
                                 <rect key="frame" x="24" y="642" width="329" height="50"/>
                                 <color key="backgroundColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -430,11 +429,19 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Edictus" id="Cnw-2p-wFQ"/>
+                    <navigationItem key="navigationItem" title="Edictus" id="Cnw-2p-wFQ">
+                        <barButtonItem key="rightBarButtonItem" image="trash" catalog="system" id="1r5-hT-euv">
+                            <connections>
+                                <action selector="deleteAction:" destination="BYZ-38-t0r" id="wDt-ds-3uG"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="createButton" destination="Ea8-Hh-hFG" id="ufV-Y4-ABQ"/>
                         <outlet property="currentDateLabel" destination="Plq-uK-nia" id="DRz-2r-Op3"/>
                         <outlet property="darkImageView" destination="kSc-t2-sPD" id="5v2-TS-nf2"/>
                         <outlet property="darkThumbnail" destination="TKO-xr-XZR" id="0fe-35-6gW"/>
+                        <outlet property="deleteButton" destination="1r5-hT-euv" id="87C-J0-nkM"/>
                         <outlet property="lightImageView" destination="tCP-0h-hcO" id="DZj-WH-PpF"/>
                         <outlet property="lightThumbnail" destination="u6q-kA-G0M" id="fjj-hM-qF8"/>
                         <outlet property="thumbnailView" destination="hVc-gw-PZW" id="ZJt-st-bhb"/>
@@ -452,6 +459,7 @@
         <image name="moon.fill" catalog="system" width="64" height="60"/>
         <image name="photo.fill" catalog="system" width="64" height="46"/>
         <image name="sun.max.fill" catalog="system" width="64" height="62"/>
+        <image name="trash" catalog="system" width="60" height="64"/>
         <image name="video.fill" catalog="system" width="64" height="40"/>
     </resources>
     <color key="tintColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
