@@ -66,7 +66,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 #warning Incomplete implementation, return the number of sections
-    return 3;
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -77,7 +77,9 @@
         case 1:
             return 2;
         case 2:
-            return 3;
+            return 2;
+        case 3:
+            return 4;
             
         default:
             break;
@@ -95,7 +97,7 @@
 -(NSString*)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section   {
     NSString *message = @"";
 
-       if (section == 2) {
+       if (section == 3) {
            message = @"\nmade with 💛 in Italy";
        }
 
@@ -137,6 +139,30 @@
                 }
        
    }else if (indexPath.section == 1){
+       //random
+       switch (indexPath.row) {
+           case 0:{
+               [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+               cell.imageView.image = [UIImage systemImageNamed: @"circle.lefthalf.fill"];
+               cell.textLabel.text = @"Search bright/dark wallpapers";
+               [cell.textLabel setFont:[UIFont systemFontOfSize:15 weight:UIFontWeightMedium]];
+               cell.detailTextLabel.text = @"" ;
+               UISwitch *onoffSwitch = [[UISwitch alloc] initWithFrame: CGRectZero];
+               [onoffSwitch setOn: [[NSUserDefaults standardUserDefaults] boolForKey:@"findBirghtAndDark"]];
+               onoffSwitch.onTintColor = [UIColor systemYellowColor];
+               cell.accessoryView = onoffSwitch;
+           break;
+           }case 1:{
+               cell.textLabel.text = @"Search random wallpapers";
+               [cell.textLabel setFont:[UIFont systemFontOfSize:15 weight:UIFontWeightMedium]];
+               cell.detailTextLabel.text = @"if you haven't found some good wallpapers click here";
+               cell.imageView.image = [UIImage systemImageNamed:@"magnifyingglass"];
+           break;
+           }
+       default:
+           break;
+       }
+   }else if (indexPath.section == 2){
        //feedback
        switch (indexPath.row) {
        case 0:
@@ -156,10 +182,11 @@
            break;
        }
        
-   }else{
+   }else if (indexPath.section == 3){
        //credits
        NSData * aboutzephPic = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: @"https://avatars.io/twitter/aboutzeph"]];
        NSData * iospeterdevPic = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: @"https://avatars.io/twitter/iospeterdev"]];
+       NSData * xeviksPic = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: @"https://avatars.io/twitter/Xeviks"]];
        NSData * stackoverflowPic = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: @"https://avatars.io/twitter/stackoverflow"]];
 
        
@@ -201,6 +228,23 @@
                break;
            }
            case 2:{
+               cell.textLabel.text = @"Luis E.";
+               cell.detailTextLabel.text = @"@Xeviks";
+               [cell.textLabel setFont:[UIFont systemFontOfSize:17 weight:UIFontWeightSemibold]];
+               cell.imageView.image = [UIImage imageWithData: xeviksPic];
+               CGSize destinationSize = CGSizeMake(35, 35);
+                                                 UIGraphicsBeginImageContextWithOptions(destinationSize, NO, 0.0f);
+                                                 [cell.imageView.image drawInRect:CGRectMake(0,0,destinationSize.width,destinationSize.height)];
+                                                 UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+                                                 UIGraphicsEndImageContext();
+                             cell.imageView.image = newImage;
+               [cell layoutIfNeeded];
+               cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
+               cell.imageView.layer.cornerRadius =  cell.imageView.frame.size.width / 2;
+               cell.imageView.clipsToBounds = YES;
+               break;
+           }
+           case 3:{
                cell.textLabel.text = @"Stack Overflow";
                cell.detailTextLabel.text = @"@stackoverflow";
                [cell.textLabel setFont:[UIFont systemFontOfSize:17 weight:UIFontWeightSemibold]];
@@ -236,8 +280,10 @@
         case 0:
             return @"General";
         case 1:
-            return @"Feedback";
+            return @"Search random wallpapers";
         case 2:
+            return @"Feedback";
+        case 3:
             return @"Credits";
         default:
             break;
@@ -261,6 +307,16 @@
      
     if (indexPath.section == 1) {
         //feedback
+        if (indexPath.row == 1) {
+                //none for now
+        }else{
+               //none
+        }
+        
+    }
+    
+    if (indexPath.section == 2) {
+        //feedback
         switch (indexPath.row) {
             case 0:
                [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"https://github.com/matteozappia/EdictusBugTracker/issues/new?assignees=&labels=bug&template=bug-report.md&title=%5BBUG%5D"] options:@{} completionHandler:nil];
@@ -275,12 +331,12 @@
         
     }
     
-    if (indexPath.section == 2) {
+    if (indexPath.section == 3) {
         //credits
         
         switch (indexPath.row) {
             case 0:
-                //nothing atm
+                //opentwittermaybe?
                 [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"https://www.twitter.com/aboutzeph"] options:@{} completionHandler:nil];
                 break;
             case 1:
@@ -288,6 +344,10 @@
                 [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"https://www.twitter.com/iospeterdev"] options:@{} completionHandler:nil];
                 break;
             case 2:
+                //opentwittermaybe?
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"https://www.twitter.com/xeviks"] options:@{} completionHandler:nil];
+                break;
+            case 3:
                 //memetime
                 [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"https://www.youtube.com/watch?v=dQw4w9WgXcQ"] options:@{} completionHandler:nil];
                 break;
