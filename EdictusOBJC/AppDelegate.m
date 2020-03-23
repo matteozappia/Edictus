@@ -22,10 +22,6 @@
     if (![ud objectForKey:@"Date"]) {
         [ud setBool:YES forKey:@"Date"];
     }
-    
-    if (![ud objectForKey:@"findBirghtAndDark"]) {
-        [ud setBool:NO forKey:@"findBirghtAndDark"];
-    }
 
     return YES;
 }

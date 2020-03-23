@@ -448,11 +448,18 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" title="Edictus" id="Cnw-2p-wFQ">
-                        <barButtonItem key="rightBarButtonItem" image="trash" catalog="system" id="1r5-hT-euv">
-                            <connections>
-                                <action selector="deleteAction:" destination="BYZ-38-t0r" id="wDt-ds-3uG"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem image="rectangle.on.rectangle.angled" catalog="system" id="aHS-ON-cxi">
+                                <connections>
+                                    <action selector="randomWallpapersAction:" destination="BYZ-38-t0r" id="BQb-SS-Ex1"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem image="trash" catalog="system" id="1r5-hT-euv">
+                                <connections>
+                                    <action selector="deleteAction:" destination="BYZ-38-t0r" id="wDt-ds-3uG"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="createButton" destination="Ea8-Hh-hFG" id="ufV-Y4-ABQ"/>
@@ -476,6 +483,7 @@
         <image name="livephoto" catalog="system" width="64" height="60"/>
         <image name="moon.fill" catalog="system" width="64" height="60"/>
         <image name="play.circle.fill" catalog="system" width="64" height="60"/>
+        <image name="rectangle.on.rectangle.angled" catalog="system" width="64" height="50"/>
         <image name="sun.max.fill" catalog="system" width="64" height="62"/>
         <image name="trash" catalog="system" width="60" height="64"/>
         <image name="video.fill" catalog="system" width="64" height="40"/>

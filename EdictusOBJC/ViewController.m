@@ -40,6 +40,14 @@
     // IMPORTANT : Create Edictus Folder in Media for the first time.
     [self createFirstTimeMedia];
 }
+
+- (IBAction)randomWallpapersAction:(id)sender {
+    // :D
+}
+
+
+
+
     
     -(void)createFirstTimeMedia{
         NSFileManager *fileManager = [NSFileManager defaultManager];
