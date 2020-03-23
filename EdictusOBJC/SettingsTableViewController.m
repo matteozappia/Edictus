@@ -184,18 +184,18 @@
        
    }else if (indexPath.section == 3){
        //credits
-       NSData * aboutzephPic = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: @"https://avatars.io/twitter/aboutzeph"]];
-       NSData * iospeterdevPic = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: @"https://avatars.io/twitter/iospeterdev"]];
-       NSData * xeviksPic = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: @"https://avatars.io/twitter/Xeviks"]];
-       NSData * stackoverflowPic = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: @"https://avatars.io/twitter/stackoverflow"]];
+       // NSData * aboutzephPic = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: @"https://avatars.io/twitter/aboutzeph"]];
+       // NSData * iospeterdevPic = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: @"https://avatars.io/twitter/iospeterdev"]];
+       //  NSData * xeviksPic = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: @"https://avatars.io/twitter/Xeviks"]];
+       // NSData * stackoverflowPic = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: @"https://avatars.io/twitter/stackoverflow"]];
 
        
        switch (indexPath.row) {
            case 0:{
                cell.textLabel.text = @"Matteo Zappia";
                cell.detailTextLabel.text = @"@aboutzeph";
-               [cell.textLabel setFont:[UIFont systemFontOfSize:17 weight:UIFontWeightSemibold]];
-               cell.imageView.image = [UIImage imageWithData: aboutzephPic];
+               [cell.textLabel setFont:[UIFont systemFontOfSize:15 weight:UIFontWeightSemibold]];
+               cell.imageView.image = [UIImage imageNamed:@"aboutzeph"];
                CGSize destinationSize = CGSizeMake(35, 35);
                                    UIGraphicsBeginImageContextWithOptions(destinationSize, NO, 0.0f)
 
@@ -213,8 +213,8 @@
            case 1:{
                cell.textLabel.text = @"Soongyu Kwon";
                cell.detailTextLabel.text = @"@iospeterdev";
-               [cell.textLabel setFont:[UIFont systemFontOfSize:17 weight:UIFontWeightSemibold]];
-               cell.imageView.image = [UIImage imageWithData: iospeterdevPic];
+               [cell.textLabel setFont:[UIFont systemFontOfSize:15 weight:UIFontWeightSemibold]];
+               cell.imageView.image = [UIImage imageNamed:@"peterdev"];
                CGSize destinationSize = CGSizeMake(35, 35);
                                                  UIGraphicsBeginImageContextWithOptions(destinationSize, NO, 0.0f);
                                                  [cell.imageView.image drawInRect:CGRectMake(0,0,destinationSize.width,destinationSize.height)];
@@ -230,8 +230,8 @@
            case 2:{
                cell.textLabel.text = @"Luis E.";
                cell.detailTextLabel.text = @"@Xeviks";
-               [cell.textLabel setFont:[UIFont systemFontOfSize:17 weight:UIFontWeightSemibold]];
-               cell.imageView.image = [UIImage imageWithData: xeviksPic];
+               [cell.textLabel setFont:[UIFont systemFontOfSize:15 weight:UIFontWeightSemibold]];
+               cell.imageView.image = [UIImage imageNamed:@"xeviks"];
                CGSize destinationSize = CGSizeMake(35, 35);
                                                  UIGraphicsBeginImageContextWithOptions(destinationSize, NO, 0.0f);
                                                  [cell.imageView.image drawInRect:CGRectMake(0,0,destinationSize.width,destinationSize.height)];
@@ -247,8 +247,8 @@
            case 3:{
                cell.textLabel.text = @"Stack Overflow";
                cell.detailTextLabel.text = @"@stackoverflow";
-               [cell.textLabel setFont:[UIFont systemFontOfSize:17 weight:UIFontWeightSemibold]];
-               cell.imageView.image = [UIImage imageWithData: stackoverflowPic];
+               [cell.textLabel setFont:[UIFont systemFontOfSize:15 weight:UIFontWeightSemibold]];
+               cell.imageView.image = [UIImage imageNamed:@"stackoverflow"];
                CGSize destinationSize = CGSizeMake(35, 35);
                                                  UIGraphicsBeginImageContextWithOptions(destinationSize, NO, 0.0f);
                                                  [cell.imageView.image drawInRect:CGRectMake(0,0,destinationSize.width,destinationSize.height)];
