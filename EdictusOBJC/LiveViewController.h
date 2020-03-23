@@ -7,10 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MobileCoreServices/MobileCoreServices.h>
+#import <AVFoundation/AVFoundation.h>
+#import <AVKit/AVKit.h>
+#import <spawn.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface LiveViewController : UIViewController
+@interface LiveViewController : UIViewController<UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 
 @end
 
