@@ -120,7 +120,7 @@ AVPlayerItem *item;
     UIImagePickerController *videoPicker = [[UIImagePickerController alloc] init];
     videoPicker.delegate = self; // ensure you set the delegate so when a video is chosen the right method can be called
 
-    videoPicker.modalPresentationStyle = UIModalPresentationPopover;
+    //videoPicker.modalPresentationStyle = UIModalPresentationPopover;
     // This code ensures only videos are shown to the end user
     videoPicker.mediaTypes = @[(NSString*)kUTTypeMovie, (NSString*)kUTTypeAVIMovie, (NSString*)kUTTypeVideo, (NSString*)kUTTypeMPEG4];
     videoPicker.videoMaximumDuration = 3;
