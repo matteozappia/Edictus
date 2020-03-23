@@ -66,7 +66,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 #warning Incomplete implementation, return the number of sections
-    return 4;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -77,8 +77,6 @@
         case 1:
             return 2;
         case 2:
-            return 2;
-        case 3:
             return 4;
             
         default:
@@ -97,7 +95,7 @@
 -(NSString*)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section   {
     NSString *message = @"";
 
-       if (section == 3) {
+       if (section == 2) {
            message = @"\nmade with 💛 in Italy";
        }
 
@@ -139,30 +137,6 @@
                 }
        
    }else if (indexPath.section == 1){
-       //random
-       switch (indexPath.row) {
-           case 0:{
-               [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-               cell.imageView.image = [UIImage systemImageNamed: @"circle.lefthalf.fill"];
-               cell.textLabel.text = @"Search bright/dark wallpapers";
-               [cell.textLabel setFont:[UIFont systemFontOfSize:15 weight:UIFontWeightMedium]];
-               cell.detailTextLabel.text = @"" ;
-               UISwitch *onoffSwitch = [[UISwitch alloc] initWithFrame: CGRectZero];
-               [onoffSwitch setOn: [[NSUserDefaults standardUserDefaults] boolForKey:@"findBirghtAndDark"]];
-               onoffSwitch.onTintColor = [UIColor systemYellowColor];
-               cell.accessoryView = onoffSwitch;
-           break;
-           }case 1:{
-               cell.textLabel.text = @"Search random wallpapers";
-               [cell.textLabel setFont:[UIFont systemFontOfSize:15 weight:UIFontWeightMedium]];
-               cell.detailTextLabel.text = @"if you haven't found some good wallpapers click here";
-               cell.imageView.image = [UIImage systemImageNamed:@"magnifyingglass"];
-           break;
-           }
-       default:
-           break;
-       }
-   }else if (indexPath.section == 2){
        //feedback
        switch (indexPath.row) {
        case 0:
@@ -182,7 +156,7 @@
            break;
        }
        
-   }else if (indexPath.section == 3){
+   }else{
        //credits
        // NSData * aboutzephPic = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: @"https://avatars.io/twitter/aboutzeph"]];
        // NSData * iospeterdevPic = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: @"https://avatars.io/twitter/iospeterdev"]];
@@ -280,10 +254,8 @@
         case 0:
             return @"General";
         case 1:
-            return @"Search random wallpapers";
-        case 2:
             return @"Feedback";
-        case 3:
+        case 2:
             return @"Credits";
         default:
             break;
@@ -304,18 +276,8 @@
                //none
         }
     }
-     
-    if (indexPath.section == 1) {
-        //feedback
-        if (indexPath.row == 1) {
-                //none for now
-        }else{
-               //none
-        }
-        
-    }
     
-    if (indexPath.section == 2) {
+    if (indexPath.section == 1) {
         //feedback
         switch (indexPath.row) {
             case 0:
@@ -331,7 +293,7 @@
         
     }
     
-    if (indexPath.section == 3) {
+    if (indexPath.section == 2) {
         //credits
         
         switch (indexPath.row) {
