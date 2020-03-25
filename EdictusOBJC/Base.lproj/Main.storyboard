@@ -311,6 +311,22 @@
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="op3-qz-OcO">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oQ3-e1-aDX">
+                                        <rect key="frame" x="112" y="539" width="151" height="40"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                        <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <state key="normal" title="Reverse" image="repeat" catalog="system"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="14"/>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="reverseImagesAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Dqe-2X-tTR"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                                 <color key="backgroundColor" systemColor="systemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CURRENT DATE LABEL" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Plq-uK-nia">
@@ -469,6 +485,7 @@
                         <outlet property="deleteButton" destination="1r5-hT-euv" id="87C-J0-nkM"/>
                         <outlet property="lightImageView" destination="tCP-0h-hcO" id="DZj-WH-PpF"/>
                         <outlet property="lightThumbnail" destination="u6q-kA-G0M" id="fjj-hM-qF8"/>
+                        <outlet property="reverseButton" destination="oQ3-e1-aDX" id="JIF-dj-0Yb"/>
                         <outlet property="thumbnailView" destination="hVc-gw-PZW" id="ZJt-st-bhb"/>
                     </connections>
                 </viewController>
@@ -485,6 +502,7 @@
         <image name="livephoto" catalog="system" width="128" height="121"/>
         <image name="moon.fill" catalog="system" width="128" height="121"/>
         <image name="play.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="repeat" catalog="system" width="128" height="99"/>
         <image name="sun.max.fill" catalog="system" width="128" height="124"/>
         <image name="trash" catalog="system" width="121" height="128"/>
         <image name="video.fill" catalog="system" width="128" height="82"/>

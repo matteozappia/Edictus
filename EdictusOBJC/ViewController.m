@@ -8,12 +8,14 @@
 
 #import "ViewController.h"
 #import <QuartzCore/QuartzCore.h>
+#import "Reachability.h"
 
 @interface ViewController ()
 @property (strong, nonatomic) IBOutlet UIImageView *lightImageView;
 @property (strong, nonatomic) IBOutlet UIImageView *darkImageView;
 @property (strong, nonatomic) IBOutlet UIButton *createButton;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *deleteButton;
+@property (strong, nonatomic) IBOutlet UIButton *reverseButton;
 
 @end
 
@@ -41,15 +43,30 @@
     [self createFirstTimeMedia];
 }
 
+- (BOOL)isConnected
+{
+    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [reachability currentReachabilityStatus];
+    return networkStatus != NotReachable;
+}
+
 - (IBAction)randomWallpapersAction:(id)sender {
-    /*
-     I don't know how internet detection would work, but below algorithm.
-     if (internet) {
-        [self fetchRandomWallpapers];
-     } else {
-        //show an alert
-     }
-     */
+
+   if (![self isConnected]) {
+       UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Not Connected"
+                                      message:@"You need an active internet connection in order to fetch random images."
+                                      preferredStyle:UIAlertControllerStyleAlert];
+
+       UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+          handler:^(UIAlertAction * action) {}];
+
+       [alert addAction:defaultAction];
+       [self presentViewController:alert animated:YES completion:nil];
+       NSLog(@"Device is not connected, can't fetch images.");
+   } else {
+       [self fetchRandomWallpapers];
+       NSLog(@"Device is connected, fetching images...");
+   }
 }
 
 -(void)fetchRandomWallpapers {
@@ -60,6 +77,7 @@
      
     [self presentViewController:alert animated:YES completion:^{
         NSString *picsumURL = [NSString stringWithFormat:@"https://picsum.photos/%.0f/%.0f", [UIScreen mainScreen].bounds.size.width*3, [UIScreen mainScreen].bounds.size.height*3];
+        NSLog(@"%@", picsumURL);
         UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:picsumURL]]];
         UIImage *imageForDark = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:picsumURL]]];
         
@@ -73,9 +91,26 @@
         NSData *imageDataForDark = [NSData dataWithData:UIImagePNGRepresentation(imageForDark)];
         [imageDataForDark writeToFile:[@"/var/mobile/Media/Edictus/" stringByAppendingPathComponent:@"Dark.png"] atomically:YES];
         [self createWallpaperplist];
+        if (self->_lightImageView.image != nil && self->_darkImageView.image != nil){
+            [[self createButton] setUserInteractionEnabled:YES];
+            [[self createButton] setAlpha:1.0];
+            [[self reverseButton] setUserInteractionEnabled:YES];
+            [[self reverseButton] setHidden:NO];
+        }
     }];
     
     [alert dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)reverseImagesAction:(id)sender {
+    UIImage *image1 = _lightImageView.image;
+    UIImage *image2 = _darkImageView.image;
+    _lightImageView.image = image2;
+    NSData *imageData = [NSData dataWithData:UIImagePNGRepresentation(_lightImageView.image)];
+    [imageData writeToFile:[@"/var/mobile/Media/Edictus/" stringByAppendingPathComponent:@"Light.png"] atomically:YES];
+    _darkImageView.image = image1;
+    NSData *imageData2 = [NSData dataWithData:UIImagePNGRepresentation(_darkImageView.image)];
+    [imageData2 writeToFile:[@"/var/mobile/Media/Edictus/" stringByAppendingPathComponent:@"Dark.png"] atomically:YES];
 }
 
 
@@ -94,6 +129,8 @@
     _darkImageView.image = nil;
     [[self createButton] setUserInteractionEnabled:NO];
     [[self createButton] setAlpha:0.5];
+    [[self reverseButton] setUserInteractionEnabled:NO];
+    [[self reverseButton] setHidden:YES];
     // just to clean up
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSError *error;
@@ -182,6 +219,8 @@
     if (_lightImageView.image != nil && _darkImageView.image != nil){
         [[self createButton] setUserInteractionEnabled:YES];
         [[self createButton] setAlpha:1.0];
+        [[self reverseButton] setUserInteractionEnabled:YES];
+        [[self reverseButton] setHidden:NO];
     }
 }
 
@@ -294,6 +333,16 @@
                [alert addAction:openSettings];
                [alert addAction:cancel];
 
+               [self presentViewController:alert animated:YES completion:nil];
+           }else{
+               UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Wallpaper already exists"
+                                              message:@"A Wallpaper with this name already exists, please change it in order to save it."
+                                              preferredStyle:UIAlertControllerStyleAlert];
+
+               UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                  handler:^(UIAlertAction * action) {}];
+
+               [alert addAction:defaultAction];
                [self presentViewController:alert animated:YES completion:nil];
            }
     }];

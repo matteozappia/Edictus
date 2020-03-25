@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1D31176C242B793000685F0E /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D31176A242B793000685F0E /* Reachability.m */; };
 		1D3A342E2415233D000F55B0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3A342D2415233D000F55B0 /* AppDelegate.m */; };
 		1D3A34312415233D000F55B0 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3A34302415233D000F55B0 /* SceneDelegate.m */; };
 		1D3A34342415233D000F55B0 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3A34332415233D000F55B0 /* ViewController.m */; };
@@ -22,6 +23,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1D311768242B785700685F0E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		1D31176A242B793000685F0E /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		1D31176B242B793000685F0E /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		1D3A34292415233D000F55B0 /* Edictus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Edictus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D3A342C2415233D000F55B0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		1D3A342D2415233D000F55B0 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -90,6 +94,8 @@
 				1D3A34532416DE45000F55B0 /* LiveViewController.m */,
 				1D3A34452415344B000F55B0 /* SettingsTableViewController.h */,
 				1D3A34462415344B000F55B0 /* SettingsTableViewController.m */,
+				1D31176B242B793000685F0E /* Reachability.h */,
+				1D31176A242B793000685F0E /* Reachability.m */,
 				1D3A343824152345000F55B0 /* Assets.xcassets */,
 				1D3A343A24152345000F55B0 /* LaunchScreen.storyboard */,
 				1D3A343D24152345000F55B0 /* Info.plist */,
@@ -101,6 +107,7 @@
 		1D844BA4242826B000E01CE9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1D311768242B785700685F0E /* SystemConfiguration.framework */,
 				1D844BA5242826B000E01CE9 /* AVFoundation.framework */,
 				1D844BA6242826B000E01CE9 /* AVKit.framework */,
 			);
@@ -179,6 +186,7 @@
 			files = (
 				1DD937A0241F4E5A001556DA /* WallpapersTableViewController.m in Sources */,
 				1D3A34542416DE45000F55B0 /* LiveViewController.m in Sources */,
+				1D31176C242B793000685F0E /* Reachability.m in Sources */,
 				1D3A34342415233D000F55B0 /* ViewController.m in Sources */,
 				1D3A342E2415233D000F55B0 /* AppDelegate.m in Sources */,
 				1D3A34472415344B000F55B0 /* SettingsTableViewController.m in Sources */,
