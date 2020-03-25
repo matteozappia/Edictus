@@ -264,7 +264,8 @@
         NSString *wallpaperNameInMedia = [NSString stringWithFormat: @"%@%@", mediaEdictus, wallpaperName];
         NSLog(@"%@", wallpaperNameInMedia);
            //creating Edictus Folder in Media
-           if (![fileManager fileExistsAtPath:wallpaperNameInMedia]){
+        NSString *wallpaperNameInLibrary = [NSString stringWithFormat: @"%@%@", @"/Library/WallpaperLoader/",wallpaperName];
+           if (![fileManager fileExistsAtPath: wallpaperNameInLibrary]){
                NSLog(@"Moving Files to wallpapername folder");
                NSURL *newDir = [NSURL fileURLWithPath:wallpaperNameInMedia];
                [fileManager createDirectoryAtURL:newDir withIntermediateDirectories:YES attributes: nil error:nil];
