@@ -45,6 +45,22 @@
     picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     // IMPORTANT : Create Edictus Folder in Media for the first time.
     [self createFirstTimeMedia];
+    
+    if ([[NSFileManager defaultManager] fileExistsAtPath:@"/var/mobile/Media/EdictusLocked/Light.png"]){
+        //get image from that path above and set it to a view. imageview, thumnailview.
+        //and after that, save it to nermoa path. Media/Edictus.
+        //and enable locked for light.
+        //and enable reverse also.
+    }
+    if ([[NSFileManager defaultManager] fileExistsAtPath:@"/var/mobile/Media/EdictusLocked/Dark.png"]){
+        //get image from that path above and set it to a view. imageview, thumnailview.
+        //and after that, save it to nermoa path. Media/Edictus.
+        //and enable locked for dark.
+        //and enable reverse also.
+    }
+    if ([[NSFileManager defaultManager] fileExistsAtPath:@"/var/mobile/Media/EdictusLocked/Light.png"] && [[NSFileManager defaultManager] fileExistsAtPath:@"/var/mobile/Media/EdictusLocked/Dark.png"]){
+        //enable create button
+    }
 }
 
 - (BOOL)isConnected
@@ -86,7 +102,7 @@
         UIImage *imageForDark = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:picsumURL]]];
         
         
-        if (!isLightLocked) {
+        if (!self->isLightLocked) {
         self->_lightImageView.image = image;
         self->_lightThumbnail.image = image;
         NSData *imageData = [NSData dataWithData:UIImagePNGRepresentation(image)];
@@ -95,7 +111,7 @@
             //nothing
         }
         
-        if (!isDarkLocked) {
+        if (!self->isDarkLocked) {
         self->_darkImageView.image = imageForDark;
         self->_darkThumbnail.image = imageForDark;
         NSData *imageDataForDark = [NSData dataWithData:UIImagePNGRepresentation(imageForDark)];
@@ -135,24 +151,33 @@
 
 
     
-    -(void)createFirstTimeMedia{
-        NSFileManager *fileManager = [NSFileManager defaultManager];
-        if (![fileManager fileExistsAtPath:@"/var/mobile/Media/Edictus"]){
-            NSLog(@"Creating Edictus folder in Media");
-            NSURL *newDir = [NSURL fileURLWithPath:@"/var/mobile/Media/Edictus"];
-            [fileManager createDirectoryAtURL:newDir withIntermediateDirectories:YES attributes: nil error:nil];
-        }
+-(void)createFirstTimeMedia{
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if (![fileManager fileExistsAtPath:@"/var/mobile/Media/Edictus"]){
+        NSLog(@"Creating Edictus folder in Media");
+        NSURL *newDir = [NSURL fileURLWithPath:@"/var/mobile/Media/Edictus"];
+        [fileManager createDirectoryAtURL:newDir withIntermediateDirectories:YES attributes: nil error:nil];
     }
+    if (![fileManager fileExistsAtPath:@"/var/mobile/Media/EdictusLocked"]){
+        NSLog(@"Creating EdictusLocked folder in Media");
+        NSURL *newDir = [NSURL fileURLWithPath:@"/var/mobile/Media/EdictusLocked"];
+        [fileManager createDirectoryAtURL:newDir withIntermediateDirectories:YES attributes: nil error:nil];
+    }
+}
 
 - (IBAction)lockLightAction:(id)sender {
     if ([sender isSelected]) {
        [sender setImage:[UIImage systemImageNamed:@"lock.open"] forState:UIControlStateNormal];
        [sender setSelected:NO];
         isLightLocked = NO;
+        NSData *imageData = [NSData dataWithData:UIImagePNGRepresentation(_lightImageView.image)];
+        [imageData writeToFile:[@"/var/mobile/Media/EdictusLocked/" stringByAppendingPathComponent:@"Light.png"] atomically:YES];
     } else {
        [sender setImage:[UIImage systemImageNamed:@"lock"] forState:UIControlStateSelected];
        [sender setSelected:YES];
         isLightLocked = YES;
+        NSData *imageData2 = [NSData dataWithData:UIImagePNGRepresentation(_darkImageView.image)];
+        [imageData2 writeToFile:[@"/var/mobile/Media/EdictusLocked/" stringByAppendingPathComponent:@"Dark.png"] atomically:YES];
     }
     
 }
@@ -170,7 +195,8 @@
 }
 
 
--(void)deleteStuff{
+-(void)deleteStuff {
+    //show an alert that it will remove all images even it's locked.
     _lightImageView.image = nil;
     _darkImageView.image = nil;
     [[self createButton] setUserInteractionEnabled:NO];
@@ -188,6 +214,8 @@
     NSError *error;
     [fileManager removeItemAtPath:@"/var/mobile/Media/Edictus/Light.png" error:&error];
     [fileManager removeItemAtPath:@"/var/mobile/Media/Edictus/Dark.png" error:&error];
+    [fileManager removeItemAtPath:@"/var/mobile/Media/EdictusLocked/Light.png" error:&error];
+    [fileManager removeItemAtPath:@"/var/mobile/Media/EdictusLocked/Dark.png" error:&error];
     [fileManager removeItemAtPath:@"/var/mobile/Media/Edictus/Wallpaper.plist" error:&error];
 }
 
