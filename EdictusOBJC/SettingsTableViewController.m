@@ -144,12 +144,14 @@
                [cell.textLabel setFont:[UIFont systemFontOfSize:15 weight:UIFontWeightMedium]];
                cell.detailTextLabel.text = @"NOTE: Device specs will be included";
                cell.imageView.image = [UIImage systemImageNamed:@"ant"];
+               cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
            break;
        case 1:
                cell.textLabel.text = @"Donate Me";
                [cell.textLabel setFont:[UIFont systemFontOfSize:15 weight:UIFontWeightMedium]];
                cell.detailTextLabel.text = @"If you want to support me click here 💘";
                cell.imageView.image = [UIImage systemImageNamed:@"dollarsign.circle"];
+               cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
            break;
            
        default:
@@ -264,6 +266,12 @@
     return @"";
 }
 
+- (void)displaySafari: (NSURL *) linkURL {
+    SFSafariViewController *safariVC = [[SFSafariViewController alloc]initWithURL:[NSURL URLWithString: linkURL] configuration:NO];
+    safariVC.delegate = self;
+    [self presentViewController:safariVC animated:YES completion:nil];
+}
+
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
@@ -281,10 +289,12 @@
         //feedback
         switch (indexPath.row) {
             case 0:
-               [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"https://github.com/matteozappia/EdictusBugTracker/issues/new?assignees=&labels=bug&template=bug-report.md&title=%5BBUG%5D"] options:@{} completionHandler:nil];
+                [self displaySafari:@"https://github.com/matteozappia/EdictusBugTracker/issues/new?assignees=&labels=bug&template=bug-report.md&title=%5BBUG%5D"];
+              // [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"https://github.com/matteozappia/EdictusBugTracker/issues/new?assignees=&labels=bug&template=bug-report.md&title=%5BBUG%5D"] options:@{} completionHandler:nil];
                 break;
             case 1:
-                [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"https://paypal.me/matteozappia"] options:@{} completionHandler:nil];
+                [self displaySafari:@"https://paypal.me/matteozappia"];
+                //[[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"https://paypal.me/matteozappia"] options:@{} completionHandler:nil];
                 break;
                 
             default:

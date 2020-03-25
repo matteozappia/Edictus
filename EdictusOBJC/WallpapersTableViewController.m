@@ -180,7 +180,7 @@ NSMutableArray *mutableDirs ;
         posix_spawn(&pid, "/usr/bin/edictusroot", NULL, NULL, (char* const*)args, NULL);
         [self fuckOffPreferences];
         [mutableDirs removeObjectAtIndex:indexPath.row];
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
         [tableView reloadData];
         
         
