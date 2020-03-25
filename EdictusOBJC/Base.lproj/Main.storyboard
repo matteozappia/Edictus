@@ -427,6 +427,38 @@
                                     <action selector="darkButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="YAf-ep-W2f"/>
                                 </connections>
                             </button>
+                            <button hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1N3-oC-0Ib">
+                                <rect key="frame" x="150" y="172" width="32" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <state key="normal" image="lock.open" catalog="system">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="16"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="16"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="lockLightAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="C1B-9D-Ha5"/>
+                                </connections>
+                            </button>
+                            <button hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9SU-vu-Hio">
+                                <rect key="frame" x="324" y="172" width="32" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <state key="normal" image="lock.open" catalog="system">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="16"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="16"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="lockDarkAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="muk-Oe-Uiq"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
@@ -485,6 +517,8 @@
                         <outlet property="deleteButton" destination="1r5-hT-euv" id="87C-J0-nkM"/>
                         <outlet property="lightImageView" destination="tCP-0h-hcO" id="DZj-WH-PpF"/>
                         <outlet property="lightThumbnail" destination="u6q-kA-G0M" id="fjj-hM-qF8"/>
+                        <outlet property="lockDark" destination="9SU-vu-Hio" id="Xaq-gF-F8c"/>
+                        <outlet property="lockLight" destination="1N3-oC-0Ib" id="r41-QO-cYK"/>
                         <outlet property="reverseButton" destination="oQ3-e1-aDX" id="JIF-dj-0Yb"/>
                         <outlet property="thumbnailView" destination="hVc-gw-PZW" id="ZJt-st-bhb"/>
                     </connections>
@@ -500,6 +534,7 @@
         <image name="gear" catalog="system" width="128" height="119"/>
         <image name="icloud.and.arrow.down" catalog="system" width="128" height="112"/>
         <image name="livephoto" catalog="system" width="128" height="121"/>
+        <image name="lock.open" catalog="system" width="128" height="112"/>
         <image name="moon.fill" catalog="system" width="128" height="121"/>
         <image name="play.circle.fill" catalog="system" width="128" height="121"/>
         <image name="repeat" catalog="system" width="128" height="99"/>

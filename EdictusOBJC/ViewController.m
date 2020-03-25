@@ -16,12 +16,16 @@
 @property (strong, nonatomic) IBOutlet UIButton *createButton;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *deleteButton;
 @property (strong, nonatomic) IBOutlet UIButton *reverseButton;
+@property (strong, nonatomic) IBOutlet UIButton *lockLight;
+@property (strong, nonatomic) IBOutlet UIButton *lockDark;
 
 @end
 
 @implementation ViewController {
     UIImagePickerController *picker;
     BOOL isDark;
+    BOOL isLightLocked;
+    BOOL isDarkLocked;
 }
 
 - (void)viewDidLoad {
@@ -81,21 +85,35 @@
         UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:picsumURL]]];
         UIImage *imageForDark = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:picsumURL]]];
         
+        
+        if (!isLightLocked) {
         self->_lightImageView.image = image;
         self->_lightThumbnail.image = image;
         NSData *imageData = [NSData dataWithData:UIImagePNGRepresentation(image)];
         [imageData writeToFile:[@"/var/mobile/Media/Edictus/" stringByAppendingPathComponent:@"Light.png"] atomically:YES];
+        }else{
+            //nothing
+        }
         
+        if (!isDarkLocked) {
         self->_darkImageView.image = imageForDark;
         self->_darkThumbnail.image = imageForDark;
         NSData *imageDataForDark = [NSData dataWithData:UIImagePNGRepresentation(imageForDark)];
         [imageDataForDark writeToFile:[@"/var/mobile/Media/Edictus/" stringByAppendingPathComponent:@"Dark.png"] atomically:YES];
+        }else{
+            //nothing
+        }
+        
         [self createWallpaperplist];
         if (self->_lightImageView.image != nil && self->_darkImageView.image != nil){
             [[self createButton] setUserInteractionEnabled:YES];
             [[self createButton] setAlpha:1.0];
             [[self reverseButton] setUserInteractionEnabled:YES];
             [[self reverseButton] setHidden:NO];
+            [[self lockLight] setUserInteractionEnabled:YES];
+            [[self lockLight] setHidden:NO];
+            [[self lockDark] setUserInteractionEnabled:YES];
+            [[self lockDark] setHidden:NO];
         }
     }];
     
@@ -105,12 +123,14 @@
 - (IBAction)reverseImagesAction:(id)sender {
     UIImage *image1 = _lightImageView.image;
     UIImage *image2 = _darkImageView.image;
+    if (!isLightLocked && !isDarkLocked){
     _lightImageView.image = image2;
     NSData *imageData = [NSData dataWithData:UIImagePNGRepresentation(_lightImageView.image)];
     [imageData writeToFile:[@"/var/mobile/Media/Edictus/" stringByAppendingPathComponent:@"Light.png"] atomically:YES];
     _darkImageView.image = image1;
     NSData *imageData2 = [NSData dataWithData:UIImagePNGRepresentation(_darkImageView.image)];
     [imageData2 writeToFile:[@"/var/mobile/Media/Edictus/" stringByAppendingPathComponent:@"Dark.png"] atomically:YES];
+    }
 }
 
 
@@ -124,6 +144,32 @@
         }
     }
 
+- (IBAction)lockLightAction:(id)sender {
+    if ([sender isSelected]) {
+       [sender setImage:[UIImage systemImageNamed:@"lock.open"] forState:UIControlStateNormal];
+       [sender setSelected:NO];
+        isLightLocked = NO;
+    } else {
+       [sender setImage:[UIImage systemImageNamed:@"lock"] forState:UIControlStateSelected];
+       [sender setSelected:YES];
+        isLightLocked = YES;
+    }
+    
+}
+
+- (IBAction)lockDarkAction:(id)sender {
+     if ([sender isSelected]) {
+          [sender setImage:[UIImage systemImageNamed:@"lock.open"] forState:UIControlStateNormal];
+          [sender setSelected:NO];
+           isDarkLocked = NO;
+       } else {
+          [sender setImage:[UIImage systemImageNamed:@"lock"] forState:UIControlStateSelected];
+          [sender setSelected:YES];
+           isDarkLocked = YES;
+       }
+}
+
+
 -(void)deleteStuff{
     _lightImageView.image = nil;
     _darkImageView.image = nil;
@@ -131,6 +177,12 @@
     [[self createButton] setAlpha:0.5];
     [[self reverseButton] setUserInteractionEnabled:NO];
     [[self reverseButton] setHidden:YES];
+    [[self lockLight] setUserInteractionEnabled:NO];
+    [[self lockLight] setHidden:YES];
+    [[self lockDark] setUserInteractionEnabled:NO];
+    [[self lockDark] setHidden:YES];
+    isLightLocked = NO;
+    isDarkLocked = NO;
     // just to clean up
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSError *error;
