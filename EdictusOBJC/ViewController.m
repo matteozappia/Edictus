@@ -42,10 +42,41 @@
 }
 
 - (IBAction)randomWallpapersAction:(id)sender {
-    // :D
+    /*
+     I don't know how internet detection would work, but below algorithm.
+     if (internet) {
+        [self fetchRandomWallpapers];
+     } else {
+        //show an alert
+     }
+     */
 }
 
-
+-(void)fetchRandomWallpapers {
+    UIAlertController * alert = [UIAlertController
+                                 alertControllerWithTitle:@"Fetching..."
+                                 message:@"Searching the best wallpapers for you 👀"
+                                 preferredStyle:UIAlertControllerStyleAlert];
+     
+    [self presentViewController:alert animated:YES completion:^{
+        NSString *picsumURL = [NSString stringWithFormat:@"https://picsum.photos/%.0f/%.0f", [UIScreen mainScreen].bounds.size.width*3, [UIScreen mainScreen].bounds.size.height*3];
+        UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:picsumURL]]];
+        UIImage *imageForDark = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:picsumURL]]];
+        
+        self->_lightImageView.image = image;
+        self->_lightThumbnail.image = image;
+        NSData *imageData = [NSData dataWithData:UIImagePNGRepresentation(image)];
+        [imageData writeToFile:[@"/var/mobile/Media/Edictus/" stringByAppendingPathComponent:@"Light.png"] atomically:YES];
+        
+        self->_darkImageView.image = imageForDark;
+        self->_darkThumbnail.image = imageForDark;
+        NSData *imageDataForDark = [NSData dataWithData:UIImagePNGRepresentation(imageForDark)];
+        [imageDataForDark writeToFile:[@"/var/mobile/Media/Edictus/" stringByAppendingPathComponent:@"Dark.png"] atomically:YES];
+        [self createWallpaperplist];
+    }];
+    
+    [alert dismissViewControllerAnimated:YES completion:nil];
+}
 
 
     
