@@ -22,7 +22,11 @@
     if (![ud objectForKey:@"Date"]) {
         [ud setBool:YES forKey:@"Date"];
     }
-
+    
+    if (![ud objectForKey:@"1.0"]) {
+            [ud setBool:NO forKey:@"1.0"];
+       }
+    
     return YES;
 }
 

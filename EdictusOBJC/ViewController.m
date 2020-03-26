@@ -30,6 +30,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"1.0"] == YES){
+    // nothing, already showed it.
+    }else{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIViewController * EdictusNew = [storyboard   instantiateViewControllerWithIdentifier:@"EdictusNew"] ;
+    [self presentViewController:EdictusNew animated:YES completion:nil];
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"1.0"];
+    }
+    
     // Do any additional setup after loading the view.
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"EEEE d MMMM"];

@@ -17,6 +17,7 @@
 		1D3A343F24152345000F55B0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3A343E24152345000F55B0 /* main.m */; };
 		1D3A34472415344B000F55B0 /* SettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3A34462415344B000F55B0 /* SettingsTableViewController.m */; };
 		1D3A34542416DE45000F55B0 /* LiveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3A34532416DE45000F55B0 /* LiveViewController.m */; };
+		1D46397A242C9F7E00C26F73 /* EdictusNewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D463979242C9F7E00C26F73 /* EdictusNewViewController.m */; };
 		1D844BA7242826B100E01CE9 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D844BA5242826B000E01CE9 /* AVFoundation.framework */; };
 		1D844BA8242826B100E01CE9 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D844BA6242826B000E01CE9 /* AVKit.framework */; };
 		1DD937A0241F4E5A001556DA /* WallpapersTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DD9379F241F4E5A001556DA /* WallpapersTableViewController.m */; };
@@ -42,6 +43,8 @@
 		1D3A34462415344B000F55B0 /* SettingsTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingsTableViewController.m; sourceTree = "<group>"; };
 		1D3A34522416DE45000F55B0 /* LiveViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LiveViewController.h; sourceTree = "<group>"; };
 		1D3A34532416DE45000F55B0 /* LiveViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LiveViewController.m; sourceTree = "<group>"; };
+		1D463978242C9F7E00C26F73 /* EdictusNewViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EdictusNewViewController.h; sourceTree = "<group>"; };
+		1D463979242C9F7E00C26F73 /* EdictusNewViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EdictusNewViewController.m; sourceTree = "<group>"; };
 		1D844BA5242826B000E01CE9 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		1D844BA6242826B000E01CE9 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 		1DD9379E241F4E5A001556DA /* WallpapersTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WallpapersTableViewController.h; sourceTree = "<group>"; };
@@ -88,6 +91,8 @@
 				1D3A34322415233D000F55B0 /* ViewController.h */,
 				1D3A34332415233D000F55B0 /* ViewController.m */,
 				1D3A34352415233D000F55B0 /* Main.storyboard */,
+				1D463978242C9F7E00C26F73 /* EdictusNewViewController.h */,
+				1D463979242C9F7E00C26F73 /* EdictusNewViewController.m */,
 				1DD9379E241F4E5A001556DA /* WallpapersTableViewController.h */,
 				1DD9379F241F4E5A001556DA /* WallpapersTableViewController.m */,
 				1D3A34522416DE45000F55B0 /* LiveViewController.h */,
@@ -187,6 +192,7 @@
 				1DD937A0241F4E5A001556DA /* WallpapersTableViewController.m in Sources */,
 				1D3A34542416DE45000F55B0 /* LiveViewController.m in Sources */,
 				1D31176C242B793000685F0E /* Reachability.m in Sources */,
+				1D46397A242C9F7E00C26F73 /* EdictusNewViewController.m in Sources */,
 				1D3A34342415233D000F55B0 /* ViewController.m in Sources */,
 				1D3A342E2415233D000F55B0 /* AppDelegate.m in Sources */,
 				1D3A34472415344B000F55B0 /* SettingsTableViewController.m in Sources */,
