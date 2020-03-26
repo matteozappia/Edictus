@@ -346,7 +346,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Did you fetched Images but don't like one of them? Lock the other and fetch again!" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QxJ-yp-xul">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Did you fetch Images but don't like one of them? Lock the other and fetch again!" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QxJ-yp-xul">
                                 <rect key="frame" x="100" y="489" width="234" height="51"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -372,7 +372,6 @@
         <!--Tab Bar Controller-->
         <scene sceneID="WWZ-NS-gr3">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="cbj-M0-Fo4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <tabBarController id="PKe-gA-eGo" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="lnG-kl-Ajr"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="1Ej-91-oVY">
@@ -388,6 +387,7 @@
                         <segue destination="l3a-mB-ogH" kind="relationship" relationship="viewControllers" id="hrQ-S1-rCn"/>
                     </connections>
                 </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cbj-M0-Fo4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2549" y="-12"/>
         </scene>
