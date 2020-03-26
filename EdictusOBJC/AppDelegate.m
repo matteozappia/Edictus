@@ -23,8 +23,8 @@
         [ud setBool:YES forKey:@"Date"];
     }
     
-    if (![ud objectForKey:@"1.0"]) {
-            [ud setBool:NO forKey:@"1.0"];
+    if (![ud objectForKey:@"didIWelcomed"]) {
+            [ud setBool:NO forKey:@"didIWelcomed"];
        }
     
     return YES;

@@ -30,14 +30,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"1.0"] == YES){
-    // nothing, already showed it.
-    }else{
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    UIViewController * EdictusNew = [storyboard   instantiateViewControllerWithIdentifier:@"EdictusNew"] ;
-    [self presentViewController:EdictusNew animated:YES completion:nil];
-    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"1.0"];
-    }
     
     // Do any additional setup after loading the view.
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -88,6 +80,13 @@
     if ([[NSFileManager defaultManager] fileExistsAtPath:@"/var/mobile/Media/EdictusLocked/Light.png"] && [[NSFileManager defaultManager] fileExistsAtPath:@"/var/mobile/Media/EdictusLocked/Dark.png"]){
         [[self createButton] setUserInteractionEnabled:YES];
         [[self createButton] setAlpha:1.0];
+    }
+    
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"didIWelcomed"]) {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        UIViewController * EdictusNew = [storyboard instantiateViewControllerWithIdentifier:@"EdictusNew"] ;
+        [self presentViewController:EdictusNew animated:YES completion:nil];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"didIWelcomed"];
     }
 }
 
