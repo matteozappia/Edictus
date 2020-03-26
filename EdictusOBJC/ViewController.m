@@ -46,7 +46,16 @@
     picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     // IMPORTANT : Create Edictus Folder in Media for the first time.
     [self createFirstTimeMedia];
-    
+    [self fetchLockedImages];
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"didIWelcomed"]) {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        UIViewController * EdictusNew = [storyboard instantiateViewControllerWithIdentifier:@"EdictusNew"] ;
+        [self presentViewController:EdictusNew animated:YES completion:nil];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"didIWelcomed"];
+    }
+}
+
+-(void)fetchLockedImages {
     if ([[NSFileManager defaultManager] fileExistsAtPath:@"/var/mobile/Media/EdictusLocked/Light.png"]){
         NSData* data = [NSData dataWithContentsOfFile:@"/var/mobile/Media/EdictusLocked/Light.png"  options:0 error:nil];
         UIImage *image = [UIImage imageWithData:data];
@@ -81,13 +90,7 @@
         [[self createButton] setUserInteractionEnabled:YES];
         [[self createButton] setAlpha:1.0];
     }
-    
-    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"didIWelcomed"]) {
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        UIViewController * EdictusNew = [storyboard instantiateViewControllerWithIdentifier:@"EdictusNew"] ;
-        [self presentViewController:EdictusNew animated:YES completion:nil];
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"didIWelcomed"];
-    }
+    if (isLightLocked || isDarkLocked) [self createWallpaperplist];
 }
 
 - (BOOL)isConnected
@@ -293,6 +296,29 @@
     [self presentViewController:alert animated:YES completion:nil];
 }
 
+-(void)deleteStuffWithoutAnAlert {
+    _lightImageView.image = nil;
+    _darkImageView.image = nil;
+    [[self createButton] setUserInteractionEnabled:NO];
+    [[self createButton] setAlpha:0.5];
+    [[self reverseButton] setUserInteractionEnabled:NO];
+    [[self reverseButton] setHidden:YES];
+    [[self lockLight] setUserInteractionEnabled:NO];
+    [[self lockLight] setHidden:YES];
+    [[self lockDark] setUserInteractionEnabled:NO];
+    [[self lockDark] setHidden:YES];
+    isLightLocked = NO;
+    isDarkLocked = NO;
+    // just to clean up
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSError *error;
+    [fileManager removeItemAtPath:@"/var/mobile/Media/Edictus/Light.png" error:&error];
+    [fileManager removeItemAtPath:@"/var/mobile/Media/Edictus/Dark.png" error:&error];
+    [fileManager removeItemAtPath:@"/var/mobile/Media/Edictus/Wallpaper.plist" error:&error];
+    
+    [self fetchLockedImages];
+}
+
 - (IBAction)deleteAction:(id)sender {
     [self deleteStuff];
 }
@@ -447,21 +473,18 @@
                                toPath:[wallpaperNameInMedia stringByAppendingPathComponent:file]
                                 error:nil];
                    
-                // [self copyChangeToMedia];
                }
                for (NSString *file in pngFiles) {
                    [fileManager moveItemAtPath:[mediaEdictus stringByAppendingPathComponent:file]
                                toPath:[wallpaperNameInMedia stringByAppendingPathComponent:file]
                                 error:nil];
                    
-                // [self copyChangeToMedia];
                }
                for (NSString *file in plistFiles) {
                    [fileManager moveItemAtPath:[mediaEdictus stringByAppendingPathComponent:file]
                                toPath:[wallpaperNameInMedia stringByAppendingPathComponent:file]
                                 error:nil];
                    
-                // [self copyChangeToMedia];
                }
                [self copyChangeToMediaWithThisWallpaperPath:wallpaperNameInMedia];
                
@@ -478,7 +501,7 @@
                                            handler:^(UIAlertAction * action) {
                                               // Open Wallpaper Settings
                                                [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"App-Prefs:Wallpaper"] options:@{} completionHandler:nil];
-                   [self deleteStuff];
+                   [self deleteStuffWithoutAnAlert];
                                            }];
 
                UIAlertAction* cancel = [UIAlertAction
@@ -486,7 +509,7 @@
                                           style:UIAlertActionStyleCancel
                                           handler:^(UIAlertAction * action) {
                                               //Handle no, thanks button
-                   [self deleteStuff];
+                   [self deleteStuffWithoutAnAlert];
                                           }];
 
                //Add your buttons to alert controller
