@@ -27,7 +27,7 @@ NSMutableArray *mutableDirs ;
     [refreshController addTarget:self action:@selector(handleRefresh:) forControlEvents:UIControlEventValueChanged];
     [self.tableView addSubview:refreshController];
     [self.tableView setEditing: YES];
-    NSArray* dirs = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:LibraryPath error:NULL];
+    NSArray* dirs = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:LibraryPath error:nil];
     mutableDirs = [dirs mutableCopy];
     
     // Uncomment the following line to preserve selection between presentations.
