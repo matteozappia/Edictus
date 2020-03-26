@@ -306,7 +306,7 @@
         <scene sceneID="QgG-2i-0S7">
             <objects>
                 <navigationController id="VsD-E1-x7r" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Dynamic" image="circle.bottomthird.split" catalog="system" id="zEp-k3-ej1"/>
+                    <tabBarItem key="tabBarItem" title="Dynamic" image="circle.righthalf.fill" catalog="system" id="zEp-k3-ej1"/>
                     <navigationItem key="navigationItem" id="9ZO-9x-AND"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="GdB-K1-2Qj">
                         <rect key="frame" x="0.0" y="44" width="375" height="96"/>
@@ -590,7 +590,7 @@
     </scenes>
     <color key="tintColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
     <resources>
-        <image name="circle.bottomthird.split" catalog="system" width="128" height="121"/>
+        <image name="circle.righthalf.fill" catalog="system" width="128" height="121"/>
         <image name="gear" catalog="system" width="128" height="119"/>
         <image name="icloud.and.arrow.down" catalog="system" width="128" height="112"/>
         <image name="livephoto" catalog="system" width="128" height="121"/>
