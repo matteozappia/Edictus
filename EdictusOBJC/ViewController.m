@@ -90,10 +90,22 @@
 }
 
 - (IBAction)randomWallpapersAction:(id)sender {
+    if (isLightLocked && isDarkLocked) {
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"All images are locked"
+                                       message:@"Unlock one or more images to fetch random wallpapers."
+                                       preferredStyle:UIAlertControllerStyleAlert];
 
+        UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+           handler:nil];
+
+        [alert addAction:defaultAction];
+        [self presentViewController:alert animated:YES completion:nil];
+        return;
+    }
+    
    if (![self isConnected]) {
        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Not Connected"
-                                      message:@"You need an active internet connection in order to fetch random images."
+                                      message:@"You need an active the internet connection in order to fetch random wallpapers."
                                       preferredStyle:UIAlertControllerStyleAlert];
 
        UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
@@ -117,26 +129,21 @@
     [self presentViewController:alert animated:YES completion:^{
         NSString *picsumURL = [NSString stringWithFormat:@"https://picsum.photos/%.0f/%.0f", [UIScreen mainScreen].bounds.size.width*3, [UIScreen mainScreen].bounds.size.height*3];
         NSLog(@"%@", picsumURL);
-        UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:picsumURL]]];
-        UIImage *imageForDark = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:picsumURL]]];
-        
         
         if (!self->isLightLocked) {
-        self->_lightImageView.image = image;
-        self->_lightThumbnail.image = image;
-        NSData *imageData = [NSData dataWithData:UIImagePNGRepresentation(image)];
-        [imageData writeToFile:[@"/var/mobile/Media/Edictus/" stringByAppendingPathComponent:@"Light.png"] atomically:YES];
-        }else{
-            //nothing
+            UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:picsumURL]]];
+            self->_lightImageView.image = image;
+            self->_lightThumbnail.image = image;
+            NSData *imageData = [NSData dataWithData:UIImagePNGRepresentation(image)];
+            [imageData writeToFile:[@"/var/mobile/Media/Edictus/" stringByAppendingPathComponent:@"Light.png"] atomically:YES];
         }
         
         if (!self->isDarkLocked) {
-        self->_darkImageView.image = imageForDark;
-        self->_darkThumbnail.image = imageForDark;
-        NSData *imageDataForDark = [NSData dataWithData:UIImagePNGRepresentation(imageForDark)];
-        [imageDataForDark writeToFile:[@"/var/mobile/Media/Edictus/" stringByAppendingPathComponent:@"Dark.png"] atomically:YES];
-        }else{
-            //nothing
+            UIImage *imageForDark = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:picsumURL]]];
+            self->_darkImageView.image = imageForDark;
+            self->_darkThumbnail.image = imageForDark;
+            NSData *imageDataForDark = [NSData dataWithData:UIImagePNGRepresentation(imageForDark)];
+            [imageDataForDark writeToFile:[@"/var/mobile/Media/Edictus/" stringByAppendingPathComponent:@"Dark.png"] atomically:YES];
         }
         
         [self createWallpaperplist];
@@ -156,6 +163,18 @@
 }
 
 - (IBAction)reverseImagesAction:(id)sender {
+    if (isLightLocked || isDarkLocked) {
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Cannot reverse"
+                                       message:@"One or more images are locked. Unlock images to reverse."
+                                       preferredStyle:UIAlertControllerStyleAlert];
+
+        UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+           handler:^(UIAlertAction * action) {}];
+
+        [alert addAction:defaultAction];
+        [self presentViewController:alert animated:YES completion:nil];
+        return;
+    }
     UIImage *image1 = _lightImageView.image;
     UIImage *image2 = _darkImageView.image;
     
@@ -233,27 +252,37 @@
 
 
 -(void)deleteStuff {
-    //show an alert that it will remove all images even it's locked.
-    _lightImageView.image = nil;
-    _darkImageView.image = nil;
-    [[self createButton] setUserInteractionEnabled:NO];
-    [[self createButton] setAlpha:0.5];
-    [[self reverseButton] setUserInteractionEnabled:NO];
-    [[self reverseButton] setHidden:YES];
-    [[self lockLight] setUserInteractionEnabled:NO];
-    [[self lockLight] setHidden:YES];
-    [[self lockDark] setUserInteractionEnabled:NO];
-    [[self lockDark] setHidden:YES];
-    isLightLocked = NO;
-    isDarkLocked = NO;
-    // just to clean up
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSError *error;
-    [fileManager removeItemAtPath:@"/var/mobile/Media/Edictus/Light.png" error:&error];
-    [fileManager removeItemAtPath:@"/var/mobile/Media/Edictus/Dark.png" error:&error];
-    [fileManager removeItemAtPath:@"/var/mobile/Media/EdictusLocked/Light.png" error:&error];
-    [fileManager removeItemAtPath:@"/var/mobile/Media/EdictusLocked/Dark.png" error:&error];
-    [fileManager removeItemAtPath:@"/var/mobile/Media/Edictus/Wallpaper.plist" error:&error];
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Are you sure to reset selected wallpapers?"
+                                   message:@"This will delete all selected images even it is locked."
+                                   preferredStyle:UIAlertControllerStyleAlert];
+
+    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+        self->_lightImageView.image = nil;
+        self->_darkImageView.image = nil;
+        [[self createButton] setUserInteractionEnabled:NO];
+        [[self createButton] setAlpha:0.5];
+        [[self reverseButton] setUserInteractionEnabled:NO];
+        [[self reverseButton] setHidden:YES];
+        [[self lockLight] setUserInteractionEnabled:NO];
+        [[self lockLight] setHidden:YES];
+        [[self lockDark] setUserInteractionEnabled:NO];
+        [[self lockDark] setHidden:YES];
+        self->isLightLocked = NO;
+        self->isDarkLocked = NO;
+        // just to clean up
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        NSError *error;
+        [fileManager removeItemAtPath:@"/var/mobile/Media/Edictus/Light.png" error:&error];
+        [fileManager removeItemAtPath:@"/var/mobile/Media/Edictus/Dark.png" error:&error];
+        [fileManager removeItemAtPath:@"/var/mobile/Media/EdictusLocked/Light.png" error:&error];
+        [fileManager removeItemAtPath:@"/var/mobile/Media/EdictusLocked/Dark.png" error:&error];
+        [fileManager removeItemAtPath:@"/var/mobile/Media/Edictus/Wallpaper.plist" error:&error];
+    }];
+    UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+
+    [alert addAction:defaultAction];
+    [alert addAction:cancelAction];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 - (IBAction)deleteAction:(id)sender {
@@ -324,11 +353,19 @@
         _darkThumbnail.image = image;
         NSData *imageData = [NSData dataWithData:UIImagePNGRepresentation(image)];
         [imageData writeToFile:[@"/var/mobile/Media/Edictus/" stringByAppendingPathComponent:@"Dark.png"] atomically:YES];
+        [[self reverseButton] setUserInteractionEnabled:YES];
+        [[self reverseButton] setHidden:NO];
+        [[self lockDark] setUserInteractionEnabled:YES];
+        [[self lockDark] setHidden:NO];
     } else {
         _lightImageView.image = image;
         _lightThumbnail.image = image;
         NSData *imageData = [NSData dataWithData:UIImagePNGRepresentation(image)];
         [imageData writeToFile:[@"/var/mobile/Media/Edictus/" stringByAppendingPathComponent:@"Light.png"] atomically:YES];
+        [[self reverseButton] setUserInteractionEnabled:YES];
+        [[self reverseButton] setHidden:NO];
+        [[self lockLight] setUserInteractionEnabled:YES];
+        [[self lockLight] setHidden:NO];
     }
     [self createWallpaperplist];
     [picker dismissViewControllerAnimated:YES completion:nil];
@@ -336,8 +373,6 @@
     if (_lightImageView.image != nil && _darkImageView.image != nil){
         [[self createButton] setUserInteractionEnabled:YES];
         [[self createButton] setAlpha:1.0];
-        [[self reverseButton] setUserInteractionEnabled:YES];
-        [[self reverseButton] setHidden:NO];
     }
 }
 
