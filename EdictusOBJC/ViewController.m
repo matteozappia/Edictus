@@ -47,19 +47,38 @@
     [self createFirstTimeMedia];
     
     if ([[NSFileManager defaultManager] fileExistsAtPath:@"/var/mobile/Media/EdictusLocked/Light.png"]){
-        //get image from that path above and set it to a view. imageview, thumnailview.
-        //and after that, save it to nermoa path. Media/Edictus.
-        //and enable locked for light.
-        //and enable reverse also.
+        NSData* data = [NSData dataWithContentsOfFile:@"/var/mobile/Media/EdictusLocked/Light.png"  options:0 error:nil];
+        UIImage *image = [UIImage imageWithData:data];
+        _lightImageView.image = image;
+        _lightThumbnail.image = image;
+        NSData *imageData = [NSData dataWithData:UIImagePNGRepresentation(_lightImageView.image)];
+        [imageData writeToFile:[@"/var/mobile/Media/Edictus/" stringByAppendingPathComponent:@"Light.png"] atomically:YES];
+        [[self lockLight] setUserInteractionEnabled:YES];
+        [[self lockLight] setHidden:NO];
+        [[self lockLight] setImage:[UIImage systemImageNamed:@"lock"] forState:UIControlStateSelected];
+        [[self lockLight] setSelected:YES];
+        isLightLocked = YES;
+        [[self reverseButton] setUserInteractionEnabled:YES];
+        [[self reverseButton] setHidden:NO];
     }
     if ([[NSFileManager defaultManager] fileExistsAtPath:@"/var/mobile/Media/EdictusLocked/Dark.png"]){
-        //get image from that path above and set it to a view. imageview, thumnailview.
-        //and after that, save it to nermoa path. Media/Edictus.
-        //and enable locked for dark.
-        //and enable reverse also.
+        NSData* data = [NSData dataWithContentsOfFile:@"/var/mobile/Media/EdictusLocked/Dark.png"  options:0 error:nil];
+        UIImage *image = [UIImage imageWithData:data];
+        _darkImageView.image = image;
+        _darkThumbnail.image = image;
+        NSData *imageData = [NSData dataWithData:UIImagePNGRepresentation(_darkImageView.image)];
+        [imageData writeToFile:[@"/var/mobile/Media/Edictus/" stringByAppendingPathComponent:@"Dark.png"] atomically:YES];
+        [[self lockDark] setUserInteractionEnabled:YES];
+        [[self lockDark] setHidden:NO];
+        [[self lockDark] setImage:[UIImage systemImageNamed:@"lock"] forState:UIControlStateSelected];
+        [[self lockDark] setSelected:YES];
+        isDarkLocked = YES;
+        [[self reverseButton] setUserInteractionEnabled:YES];
+        [[self reverseButton] setHidden:NO];
     }
     if ([[NSFileManager defaultManager] fileExistsAtPath:@"/var/mobile/Media/EdictusLocked/Light.png"] && [[NSFileManager defaultManager] fileExistsAtPath:@"/var/mobile/Media/EdictusLocked/Dark.png"]){
-        //enable create button
+        [[self createButton] setUserInteractionEnabled:YES];
+        [[self createButton] setAlpha:1.0];
     }
 }
 
@@ -139,13 +158,25 @@
 - (IBAction)reverseImagesAction:(id)sender {
     UIImage *image1 = _lightImageView.image;
     UIImage *image2 = _darkImageView.image;
+    
+    BOOL lightUserInteractionCached = self.lockLight.userInteractionEnabled;
+    BOOL lightHiddenCached = self.lockLight.hidden;
+    
+    BOOL darkUserInteractionCached = self.lockDark.userInteractionEnabled;
+    BOOL darkHiddenCached = self.lockDark.hidden;
+    
     if (!isLightLocked && !isDarkLocked){
-    _lightImageView.image = image2;
-    NSData *imageData = [NSData dataWithData:UIImagePNGRepresentation(_lightImageView.image)];
-    [imageData writeToFile:[@"/var/mobile/Media/Edictus/" stringByAppendingPathComponent:@"Light.png"] atomically:YES];
-    _darkImageView.image = image1;
-    NSData *imageData2 = [NSData dataWithData:UIImagePNGRepresentation(_darkImageView.image)];
-    [imageData2 writeToFile:[@"/var/mobile/Media/Edictus/" stringByAppendingPathComponent:@"Dark.png"] atomically:YES];
+        _lightImageView.image = image2;
+        NSData *imageData = [NSData dataWithData:UIImagePNGRepresentation(_lightImageView.image)];
+        [imageData writeToFile:[@"/var/mobile/Media/Edictus/" stringByAppendingPathComponent:@"Light.png"] atomically:YES];
+        _darkImageView.image = image1;
+        NSData *imageData2 = [NSData dataWithData:UIImagePNGRepresentation(_darkImageView.image)];
+        [imageData2 writeToFile:[@"/var/mobile/Media/Edictus/" stringByAppendingPathComponent:@"Dark.png"] atomically:YES];
+        [[self lockLight] setUserInteractionEnabled:darkUserInteractionCached];
+        [[self lockLight] setHidden:darkHiddenCached];
+        
+        [[self lockDark] setUserInteractionEnabled:lightUserInteractionCached];
+        [[self lockDark] setHidden:lightHiddenCached];
     }
 }
 
@@ -170,28 +201,34 @@
        [sender setImage:[UIImage systemImageNamed:@"lock.open"] forState:UIControlStateNormal];
        [sender setSelected:NO];
         isLightLocked = NO;
-        NSData *imageData = [NSData dataWithData:UIImagePNGRepresentation(_lightImageView.image)];
-        [imageData writeToFile:[@"/var/mobile/Media/EdictusLocked/" stringByAppendingPathComponent:@"Light.png"] atomically:YES];
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        NSError *error;
+        [fileManager removeItemAtPath:@"/var/mobile/Media/EdictusLocked/Light.png" error:&error];
     } else {
        [sender setImage:[UIImage systemImageNamed:@"lock"] forState:UIControlStateSelected];
        [sender setSelected:YES];
         isLightLocked = YES;
-        NSData *imageData2 = [NSData dataWithData:UIImagePNGRepresentation(_darkImageView.image)];
-        [imageData2 writeToFile:[@"/var/mobile/Media/EdictusLocked/" stringByAppendingPathComponent:@"Dark.png"] atomically:YES];
+        NSData *imageData = [NSData dataWithData:UIImagePNGRepresentation(_lightImageView.image)];
+        [imageData writeToFile:[@"/var/mobile/Media/EdictusLocked/" stringByAppendingPathComponent:@"Light.png"] atomically:YES];
     }
     
 }
 
 - (IBAction)lockDarkAction:(id)sender {
      if ([sender isSelected]) {
-          [sender setImage:[UIImage systemImageNamed:@"lock.open"] forState:UIControlStateNormal];
-          [sender setSelected:NO];
-           isDarkLocked = NO;
+         [sender setImage:[UIImage systemImageNamed:@"lock.open"] forState:UIControlStateNormal];
+         [sender setSelected:NO];
+         isDarkLocked = NO;
+         NSFileManager *fileManager = [NSFileManager defaultManager];
+         NSError *error;
+         [fileManager removeItemAtPath:@"/var/mobile/Media/EdictusLocked/Dark.png" error:&error];
        } else {
-          [sender setImage:[UIImage systemImageNamed:@"lock"] forState:UIControlStateSelected];
-          [sender setSelected:YES];
-           isDarkLocked = YES;
-       }
+         [sender setImage:[UIImage systemImageNamed:@"lock"] forState:UIControlStateSelected];
+         [sender setSelected:YES];
+         isDarkLocked = YES;
+         NSData *imageData2 = [NSData dataWithData:UIImagePNGRepresentation(_darkImageView.image)];
+         [imageData2 writeToFile:[@"/var/mobile/Media/EdictusLocked/" stringByAppendingPathComponent:@"Dark.png"] atomically:YES];
+    }
 }
 
 
