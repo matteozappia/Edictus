@@ -276,10 +276,15 @@
         [[self reverseButton] setHidden:YES];
         [[self lockLight] setUserInteractionEnabled:NO];
         [[self lockLight] setHidden:YES];
+        [[self lockLight] setImage:[UIImage systemImageNamed:@"lock.open"] forState:UIControlStateNormal];
+        [[self lockLight] setSelected:NO];
         [[self lockDark] setUserInteractionEnabled:NO];
         [[self lockDark] setHidden:YES];
+        [[self lockDark] setImage:[UIImage systemImageNamed:@"lock.open"] forState:UIControlStateNormal];
+        [[self lockDark] setSelected:NO];
         self->isLightLocked = NO;
         self->isDarkLocked = NO;
+        
         // just to clean up
         NSFileManager *fileManager = [NSFileManager defaultManager];
         NSError *error;
@@ -305,8 +310,12 @@
     [[self reverseButton] setHidden:YES];
     [[self lockLight] setUserInteractionEnabled:NO];
     [[self lockLight] setHidden:YES];
+    [[self lockLight] setImage:[UIImage systemImageNamed:@"lock.open"] forState:UIControlStateNormal];
+    [[self lockLight] setSelected:NO];
     [[self lockDark] setUserInteractionEnabled:NO];
     [[self lockDark] setHidden:YES];
+    [[self lockDark] setImage:[UIImage systemImageNamed:@"lock.open"] forState:UIControlStateNormal];
+    [[self lockDark] setSelected:NO];
     isLightLocked = NO;
     isDarkLocked = NO;
     // just to clean up
