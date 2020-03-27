@@ -3,7 +3,7 @@ Name: Edictus
 Version: 1.0
 Architecture: iphoneos-arm
 Depends: uikittools, wallpaperloader
-Description: Create custom dynamic wallpapers!
+Description: Create your own Wallpapers!
 Maintainer: aboutzeph & Soongyu Kwon <aboutzeph@gmail.com>
 Author: aboutzeph & Soongyu Kwon <aboutzeph@gmail.com>
-Section: Utilities
+Section: Tweaks
