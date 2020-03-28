@@ -438,6 +438,8 @@
 }
 
 - (IBAction)createButtonPressed:(id)sender {
+    _lightThumbnail.image = _lightImageView.image;
+    _darkThumbnail.image = _darkImageView.image;
     
     // create alert, textField.text will be the bundle name
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"Wallpaper Title" message:nil preferredStyle:UIAlertControllerStyleAlert];
@@ -466,8 +468,6 @@
                [fileManager createDirectoryAtURL:newDir withIntermediateDirectories:YES attributes: nil error:nil];
                
                // CREATE THUMBNAIL
-               self->_lightThumbnail.image = self->_lightImageView.image;
-               self->_darkThumbnail.image = self->_darkImageView.image;
                UIImage *thumbnailImage = [self imageWithView:[self thumbnailView]];
                NSData *imageData = [NSData dataWithData:UIImageJPEGRepresentation(thumbnailImage, 1.0)];
                [imageData writeToFile:[@"/var/mobile/Media/Edictus/" stringByAppendingPathComponent:@"Thumbnail.jpg"] atomically:YES];
