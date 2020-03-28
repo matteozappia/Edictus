@@ -466,8 +466,8 @@
                [fileManager createDirectoryAtURL:newDir withIntermediateDirectories:YES attributes: nil error:nil];
                
                // CREATE THUMBNAIL
-               _lightThumbnail.image = _lightImageView.image;
-               _darkThumbnail.image = _darkImageView.image;
+               self->_lightThumbnail.image = self->_lightImageView.image;
+               self->_darkThumbnail.image = self->_darkImageView.image;
                UIImage *thumbnailImage = [self imageWithView:[self thumbnailView]];
                NSData *imageData = [NSData dataWithData:UIImageJPEGRepresentation(thumbnailImage, 1.0)];
                [imageData writeToFile:[@"/var/mobile/Media/Edictus/" stringByAppendingPathComponent:@"Thumbnail.jpg"] atomically:YES];
