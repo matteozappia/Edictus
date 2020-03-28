@@ -452,7 +452,8 @@
     
     UIAlertAction *action = [UIAlertAction actionWithTitle:@"Save" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
       NSLog(@"Save Tapped");
-      NSString *wallpaperName = alertVC.textFields[0].text;
+      NSString *wallpaperNameWithSpaces = alertVC.textFields[0].text;
+        NSString * wallpaperName = [wallpaperNameWithSpaces stringByReplacingOccurrencesOfString:@" " withString:@""];
       NSLog(@"%@", wallpaperName);
       
         NSFileManager *fileManager = [NSFileManager defaultManager];

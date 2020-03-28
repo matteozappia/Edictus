@@ -29,6 +29,7 @@ NSMutableArray *mutableDirs ;
     [self.tableView setEditing: YES];
     NSArray* dirs = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:LibraryPath error:nil];
     mutableDirs = [dirs mutableCopy];
+    NSLog(@"%@", mutableDirs);
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
