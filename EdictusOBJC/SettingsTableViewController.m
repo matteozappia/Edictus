@@ -66,7 +66,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 #warning Incomplete implementation, return the number of sections
-    return 3;
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -78,6 +78,8 @@
             return 2;
         case 2:
             return 4;
+        case 3:
+            return 1;
             
         default:
             break;
@@ -95,7 +97,7 @@
 -(NSString*)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section   {
     NSString *message = @"";
 
-       if (section == 2) {
+       if (section == 3) {
            message = @"\nmade with 💛 in Italy";
        }
 
@@ -158,7 +160,7 @@
            break;
        }
        
-   }else{
+   }else if (indexPath.section == 2){
        //credits
        // NSData * aboutzephPic = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: @"https://avatars.io/twitter/aboutzeph"]];
        // NSData * iospeterdevPic = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: @"https://avatars.io/twitter/iospeterdev"]];
@@ -173,9 +175,7 @@
                [cell.textLabel setFont:[UIFont systemFontOfSize:15 weight:UIFontWeightSemibold]];
                cell.imageView.image = [UIImage imageNamed:@"aboutzeph"];
                CGSize destinationSize = CGSizeMake(35, 35);
-                                   UIGraphicsBeginImageContextWithOptions(destinationSize, NO, 0.0f)
-
-;
+                                   UIGraphicsBeginImageContextWithOptions(destinationSize, NO, 0.0f);
                                    [cell.imageView.image drawInRect:CGRectMake(0,0,destinationSize.width,destinationSize.height)];
                                    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
                                    UIGraphicsEndImageContext();
@@ -241,6 +241,12 @@
                break;
            }
        }
+   }else {
+       cell.textLabel.text = @"gizroot";
+       [cell.textLabel setFont:[UIFont systemFontOfSize:15 weight:UIFontWeightMedium]];
+       cell.detailTextLabel.text = @"gizroot by GetPackager(ConnorTheDev)";
+       cell.imageView.image = [UIImage systemImageNamed:@"doc.plaintext"];
+       cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
    }
     
 
@@ -259,6 +265,8 @@
             return @"Feedback";
         case 2:
             return @"Credits";
+        case 3:
+            return @"License";
         default:
             break;
     }
@@ -327,6 +335,10 @@
             default:
                 break;
         }
+    }
+    
+    if (indexPath.section == 3) {
+        [self displaySafari:@"https://github.com/matteozappia/Edictus/blob/master/edictusroot/LICENSE"];
     }
     
     
